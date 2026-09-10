@@ -1,0 +1,8 @@
+---
+const { value, label, source = 'Source required' } = Astro.props;
+---
+<article class="stat-card">
+  <div class="stat-value">{value}</div>
+  <div class="stat-label">{label}</div>
+  <div class="stat-source">{source}</div>
+</article>

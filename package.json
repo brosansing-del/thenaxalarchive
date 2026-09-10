@@ -1,0 +1,22 @@
+{
+  "name": "thenaxalarchive",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "npm run validate:data && astro build",
+    "preview": "astro preview",
+    "validate:data": "node scripts/validate-data.mjs",
+    "sync:data": "node scripts/sync-public-data.mjs"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "astro": "^5.0.0",
+    "chart.js": "^4.4.7",
+    "d3": "^7.9.0",
+    "maplibre-gl": "^5.0.0",
+    "papaparse": "^5.5.0",
+    "typescript": "^5.7.2"
+  }
+}
