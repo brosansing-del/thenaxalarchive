@@ -1,13 +1,17 @@
 ---
 import '../styles/global.css';
-const { title = 'The Naxal Archive', description = 'A sourced, data-led archive tracking the history, geography, violence and development context of Left Wing Extremism in India.' } = Astro.props;
+const {
+  title = 'The Naxal Archive',
+  description = 'A data-led archive documenting the history, contraction and transformation of Left Wing Extremism in India.'
+} = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
   <body>

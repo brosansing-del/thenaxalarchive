@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '');
+---
+<BaseLayout title="Data & Visuals — The Naxal Archive" description="Interactive datasets, maps and visual records on Left Wing Extremism in India.">
+  <Header />
+  <main class="dv-index shell">
+    <div class="intro">
+      <span class="eyebrow">Data & Visuals</span>
+      <h1>Explore the archive through data.</h1>
+      <p>Structured records, source-led tables and visual summaries covering geography, leadership, infrastructure and long-term change.</p>
+    </div>
+    <section class="entry-grid">
+      <a class="entry-card" href={`${BASE}/data-visuals/senior-leadership-exits/`}>
+        <div class="entry-image"><img src={`${BASE}/images/data/leadership/03.jpg`} alt="Senior CPI (Maoist) leadership record" /></div>
+        <div class="entry-copy"><span>Leadership · Jan 2025–Feb 2026</span><h2>Senior CPI (Maoist) Leadership Attrition & Surrenders</h2><p>A searchable visual record of 19 PBM and CCM-level exits listed in the supplied source.</p><strong>Explore data →</strong></div>
+      </a>
+      <div class="entry-card coming"><div class="entry-copy"><span>Coming next</span><h2>Infrastructure Targeting</h2><p>Year, state and asset-type patterns from the infrastructure-targeting dataset.</p></div></div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+<style>
+.dv-index{padding:54px 0 80px}.intro{max-width:780px;margin-bottom:36px}.intro h1{font:700 clamp(42px,6vw,70px)/1 Georgia,serif;letter-spacing:-.035em;margin:8px 0 18px}.intro p{font:500 18px/1.5 Georgia,serif;color:#596268}.eyebrow{font:700 10px system-ui,sans-serif;text-transform:uppercase;letter-spacing:.11em;color:#9c4f37}.entry-grid{display:grid;grid-template-columns:1.4fr .8fr;gap:18px}.entry-card{border:1px solid #d7cec0;background:#fffdf8;color:#132026;text-decoration:none;display:grid;grid-template-columns:260px 1fr;min-height:280px;overflow:hidden}.entry-image img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%)}.entry-copy{padding:28px}.entry-copy span{font:700 10px system-ui,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:#9c4f37}.entry-copy h2{font:700 30px/1.05 Georgia,serif;margin:10px 0 14px}.entry-copy p{color:#66655f;line-height:1.55}.entry-copy strong{display:block;margin-top:28px}.coming{display:block;background:#e9e2d6}.coming .entry-copy h2{font-size:27px}@media(max-width:850px){.entry-grid{grid-template-columns:1fr}.entry-card{grid-template-columns:180px 1fr}}@media(max-width:560px){.entry-card{grid-template-columns:1fr}.entry-image{height:190px}}
+</style>

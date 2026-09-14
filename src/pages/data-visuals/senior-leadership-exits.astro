@@ -1,0 +1,163 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+import Papa from 'papaparse';
+
+const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '');
+const csvPath = path.join(process.cwd(), 'public', 'data', 'senior-leadership-exits.csv');
+const csvText = fs.readFileSync(csvPath, 'utf8');
+const parsed = Papa.parse(csvText, { header: true, skipEmptyLines: true });
+const records = parsed.data;
+
+const total = records.length;
+
+const states = [...new Set(records.map((r) => r.state))].sort();
+const months = [
+  '2025-01','2025-02','2025-03','2025-04','2025-05','2025-06','2025-07','2025-08','2025-09','2025-10','2025-11','2025-12','2026-01','2026-02'
+];
+const monthStats = months.map((month) => ({
+  month,
+  died: records.filter((r) => r.date.startsWith(month) && r.outcome === 'Died in EoF').length,
+  surrendered: records.filter((r) => r.date.startsWith(month) && r.outcome === 'Surrendered').length,
+}));
+const monthLabels = {
+  '2025-01':'Jan 25','2025-02':'Feb','2025-03':'Mar','2025-04':'Apr','2025-05':'May','2025-06':'Jun','2025-07':'Jul','2025-08':'Aug','2025-09':'Sep','2025-10':'Oct','2025-11':'Nov','2025-12':'Dec','2026-01':'Jan 26','2026-02':'Feb'
+};
+
+function prettyDate(value) {
+  return new Date(`${value}T00:00:00`).toLocaleDateString('en-IN', {
+    day: '2-digit', month: 'short', year: 'numeric'
+  });
+}
+---
+<BaseLayout title="Senior CPI (Maoist) Leadership Attrition & Surrenders — The Naxal Archive" description="PBM and CCM-level exits recorded in the supplied dataset, January 2025 to February 2026.">
+  <Header />
+  <main class="dv-page">
+    <section class="dv-hero shell">
+      <div class="crumbs"><a href={`${BASE}/`}>Home</a><span>›</span><a href={`${BASE}/data-visuals/`}>Data & Visuals</a><span>›</span><strong>Leadership exits</strong></div>
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow">Data & Visuals · Leadership</span>
+          <h1>Senior CPI (Maoist) Leadership Attrition & Surrenders</h1>
+        </div>
+        <div class="portrait-collage" aria-label="Portraits reproduced from the supplied source record">
+          {records.slice(0, 6).map((r) => (
+            <img src={`${BASE}/images/data/leadership/${r.photo}`} alt={r.name} loading="eager" />
+          ))}
+        </div>
+      </div>
+    </section>
+
+
+    <section class="shell table-section">
+      <div class="table-headline">
+        <div><span class="eyebrow">Leadership exits</span><h2>Search or filter the source-derived records below.</h2></div>
+        <a class="download" href={`${BASE}/data/senior-leadership-exits.csv`} download>Download CSV ↓</a>
+      </div>
+
+      <div class="filters" aria-label="Table filters">
+        <label class="search"><span>Search</span><input id="leaderSearch" type="search" placeholder="Name, alias or rank…" /></label>
+        <label><span>Outcome</span><select id="outcomeFilter"><option value="">All outcomes</option><option>Died in EoF</option><option>Surrendered</option></select></label>
+        <label><span>State</span><select id="stateFilter"><option value="">All states</option>{states.map((s) => <option value={s}>{s}</option>)}</select></label>
+        <label><span>Rank</span><select id="rankFilter"><option value="">All ranks</option><option value="PBM">PBM</option><option value="CCM">CCM</option></select></label>
+        <button id="resetFilters" type="button">Reset</button>
+      </div>
+
+      <div class="result-row"><strong id="resultCount">{total}</strong><span>records shown</span></div>
+
+      <div class="table-wrap">
+        <table class="leader-table">
+          <thead><tr><th>#</th><th>Photo</th><th>Name / alias</th><th>Rank</th><th>Date</th><th>Outcome</th><th>State</th></tr></thead>
+          <tbody id="leaderRows">
+            {records.map((r, i) => (
+              <tr data-search={`${r.name} ${r.rank}`.toLowerCase()} data-outcome={r.outcome} data-state={r.state} data-rank={r.rank.startsWith('PBM') ? 'PBM' : 'CCM'}>
+                <td class="num">{i + 1}</td>
+                <td><img class="portrait" src={`${BASE}/images/data/leadership/${r.photo}`} alt={r.name} loading="lazy" /></td>
+                <td class="name"><strong>{r.name}</strong></td>
+                <td>{r.rank}</td>
+                <td class="date">{prettyDate(r.date)}</td>
+                <td><span class:list={["status", r.outcome === 'Surrendered' ? 'surrendered' : 'died']}>{r.outcome}</span></td>
+                <td>{r.state}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+          </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  const search = document.querySelector('#leaderSearch');
+  const outcome = document.querySelector('#outcomeFilter');
+  const state = document.querySelector('#stateFilter');
+  const rank = document.querySelector('#rankFilter');
+  const reset = document.querySelector('#resetFilters');
+  const resultCount = document.querySelector('#resultCount');
+  const rows = [...document.querySelectorAll('#leaderRows tr')];
+
+  function filterRows() {
+    const q = search.value.trim().toLowerCase();
+    let visible = 0;
+    rows.forEach((row) => {
+      const ok = (!q || row.dataset.search.includes(q)) &&
+        (!outcome.value || row.dataset.outcome === outcome.value) &&
+        (!state.value || row.dataset.state === state.value) &&
+        (!rank.value || row.dataset.rank === rank.value);
+      row.hidden = !ok;
+      if (ok) visible += 1;
+    });
+    resultCount.textContent = String(visible);
+  }
+
+  [search, outcome, state, rank].forEach((el) => el.addEventListener('input', filterRows));
+  reset.addEventListener('click', () => {
+    search.value = '';
+    outcome.value = '';
+    state.value = '';
+    rank.value = '';
+    filterRows();
+  });
+</script>
+
+<style>
+  .dv-page{background:#f3efe5;color:#111b20;padding-bottom:72px}
+  .dv-page .shell{max-width:1180px}
+  .dv-hero{padding-top:32px;padding-bottom:30px}
+  .crumbs{display:flex;gap:9px;align-items:center;font:600 11px/1.4 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:#756f65;margin-bottom:24px}
+  .crumbs a{color:inherit;text-decoration:none}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(260px,.65fr);gap:42px;align-items:start}
+  .dv-hero h1{font:700 clamp(42px,6vw,72px)/.96 Georgia,serif;letter-spacing:-.035em;margin:8px 0 0;max-width:900px}
+  .portrait-collage{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;background:#1d282c;padding:5px;border-radius:3px;align-self:start}
+  .portrait-collage img{width:100%;aspect-ratio:1/1;object-fit:cover;filter:grayscale(100%);display:block}
+  .table-section{padding-top:8px}
+  .table-headline{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:16px;padding-top:10px;border-top:1px solid #d8d0c3}
+  .table-headline h2{font:700 31px/1.12 Georgia,serif;margin:6px 0 0;max-width:680px}
+  .download{display:inline-flex;padding:10px 14px;border:1px solid #bcb3a6;color:#111b20;text-decoration:none;font:700 11px system-ui,sans-serif;background:#fffdf8}
+  .filters{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:10px;align-items:end;background:#fffdf8;border:1px solid #d9d1c3;padding:14px;margin-bottom:10px}
+  .filters label{display:grid;gap:5px;font:700 10px system-ui,sans-serif;text-transform:uppercase;letter-spacing:.07em;color:#756e65}
+  .filters input,.filters select{width:100%;min-height:42px;border:1px solid #c9c0b3;background:white;padding:0 12px;font:500 13px system-ui,sans-serif;color:#172127}
+  .filters button{min-height:42px;border:1px solid #afa598;background:#f2ede4;padding:0 16px;font-weight:700;cursor:pointer}
+  .result-row{display:flex;gap:5px;align-items:baseline;font:500 12px system-ui,sans-serif;color:#706a62;margin:9px 0}
+  .result-row strong{font-size:15px;color:#111b20}
+  .table-wrap{overflow-x:auto;background:#fffdf8;border:1px solid #d9d1c3}
+  .leader-table{width:100%;border-collapse:collapse;min-width:980px}
+  .leader-table th{position:sticky;top:0;background:#e9e2d6;text-align:left;font:700 11px system-ui,sans-serif;text-transform:uppercase;letter-spacing:.055em;color:#514c46;padding:12px 10px;border-bottom:1px solid #d3cabe}
+  .leader-table td{padding:9px 10px;border-bottom:1px solid #e5ded3;vertical-align:middle;font:500 13px/1.35 system-ui,sans-serif;color:#283239}
+  .leader-table tbody tr:hover{background:#faf6ee}
+  .leader-table .num{width:38px;color:#7d756c}
+  .portrait{width:58px;height:58px;object-fit:cover;filter:grayscale(100%);border-radius:3px;border:1px solid #c8c0b5;background:#eee}
+  .name{min-width:220px}.date{white-space:nowrap}
+  .status{display:inline-flex;padding:6px 9px;border-radius:5px;font:700 11px system-ui,sans-serif;white-space:nowrap}
+  .status.died{background:#f5dcd6;color:#8d3124}.status.surrendered{background:#dce9dc;color:#315d3b}
+  .source-note{margin-top:16px;border:1px solid #d6cfc3;background:#eee8df;padding:16px 18px;font:500 12px/1.55 system-ui,sans-serif;color:#615d57}
+  .source-note strong{color:#20292e}.source-note p{margin:5px 0}
+  .eyebrow{font:700 10px system-ui,sans-serif;text-transform:uppercase;letter-spacing:.11em;color:#9c4f37}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr}.portrait-collage{max-width:420px}.filters{grid-template-columns:1fr 1fr}.filters .search{grid-column:1/-1}.filters button{width:100%}}
+  @media(max-width:560px){.dv-hero h1{font-size:43px}.filters{grid-template-columns:1fr}.filters .search{grid-column:auto}.table-headline{align-items:flex-start;flex-direction:column}.portrait-collage{grid-template-columns:repeat(3,1fr)}}
+</style>

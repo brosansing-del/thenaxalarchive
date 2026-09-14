@@ -1,0 +1,47 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  return articles.map((article) => ({
+    params: { id: article.id },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+const formattedDate = article.data.published.toLocaleDateString('en-IN', {
+  day: '2-digit', month: 'short', year: 'numeric'
+});
+---
+<BaseLayout title={`${article.data.title} — The Naxal Archive`} description={article.data.dek}>
+  <Header />
+  <main>
+    <article class="article-page shell">
+      <header class="article-header">
+        <div class="article-kicker">{article.data.section} · {article.data.type}</div>
+        <h1>{article.data.title}</h1>
+        {article.data.dek && <p class="article-dek">{article.data.dek}</p>}
+        <div class="article-meta">
+          <span>{article.data.author}</span>
+          <span>{formattedDate}</span>
+          {article.data.readTime && <span>{article.data.readTime}</span>}
+        </div>
+        {article.data.verificationNote && (
+          <div class="article-note"><strong>Editorial note:</strong> {article.data.verificationNote}</div>
+        )}
+      </header>
+      <div class="article-body">
+        <Content />
+      </div>
+      <footer class="article-end">
+        <a href={`${import.meta.env.BASE_URL}#articles`}>← Back to Articles</a>
+      </footer>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const articles = (await getCollection('articles')).sort(
+  (a, b) => b.data.published.valueOf() - a.data.published.valueOf()
+);
+
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articleUrl = (id: string) => `${BASE}/articles/${id}/`;
+---
+
+<BaseLayout
+  title="Articles — The Naxal Archive"
+  description="News Desk reporting, analysis and opinion from The Naxal Archive."
+>
+  <Header />
+
+  <main class="section shell">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Articles</span>
+        <h1 class="listing-title">News Desk & Opinions</h1>
+      </div>
+
+      <p>
+        Reporting and analysis published alongside the archive's structured
+        datasets and source trails.
+      </p>
+    </div>
+
+    <div class="article-index-grid">
+      
+    {articles.map((article) => (
+  <a
+    class="article-index-card"
+    href={articleUrl(article.id)}
+  >
+    {article.data.cover && (
+      <div class="article-index-image">
+        <img
+          src={article.data.cover}
+          alt={article.data.title}
+          loading="lazy"
+        />
+      </div>
+    )}
+
+    <div class="article-index-content">
+      <span>
+        {article.data.section} · {article.data.type}
+      </span>
+
+      <h2>{article.data.title}</h2>
+
+      {article.data.dek && (
+        <p>{article.data.dek}</p>
+      )}
+
+      <small>
+        {article.data.readTime ?? 'Read article'} →
+      </small>
+    </div>
+  </a>
+))}
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

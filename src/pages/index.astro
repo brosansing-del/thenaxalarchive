@@ -3,87 +3,328 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StatCard from '../components/StatCard.astro';
+import { getCollection } from 'astro:content';
+
+const articles = (await getCollection('articles')).sort(
+  (a, b) => b.data.published.valueOf() - a.data.published.valueOf()
+);
+
+const featuredArticle =
+  articles.find((a) => a.data.featured) ?? articles[0];
+
+const latestArticles = articles
+  .filter((a) => a.id !== featuredArticle?.id)
+  .slice(0, 4);
+
+/*
+  Normalize Astro's base path so it works both:
+  - locally: /thenaxalarchive/
+  - on GitHub Pages: /thenaxalarchive/
+*/
+const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '');
+
+const articleUrl = (id: string) => `${BASE}/articles/${id}/`;
+const pageUrl = (path: string) => `${BASE}/${path.replace(/^\/+/, '')}`;
 ---
+
 <BaseLayout>
   <Header />
+
   <main>
+    <!-- HERO -->
     <section class="hero">
       <div class="shell hero-grid">
         <div>
-          <div class="eyebrow">Research archive · India · 1967–present</div>
-          <h1>Documenting the history, contraction and transformation of Left Wing Extremism in India.</h1>
-          <p class="lede">A data-led archive bringing together historical context, official records, mapped trends, current reporting and development indicators.</p>
+          <div class="eyebrow">
+            Research archive · India · 1967–present
+          </div>
+
+          <h1>
+            Documenting the history, contraction and transformation
+            of Left Wing Extremism in India.
+          </h1>
+
+          <p class="lede">
+            A data-led archive bringing together historical context,
+            official records, mapped trends, current reporting and
+            development indicators.
+          </p>
         </div>
+
         <aside class="hero-note">
           <strong>Editorial principle</strong>
-          <p>Official data, archive-verified data and analysis are labelled separately. Every public figure should have a source trail and revision history.</p>
+
+          <p>
+            Official data, archive-verified data and analysis are
+            labelled separately. Every public figure should have a
+            source trail and revision history.
+          </p>
         </aside>
       </div>
     </section>
 
+    <!-- KEY INDICATORS -->
     <section class="section shell">
       <div class="section-head">
-        <div><span class="eyebrow">Current picture</span><h2>Key indicators</h2></div>
-        <p>Populate these cards only from validated datasets. No hard-coded headline numbers.</p>
+        <div>
+          <span class="eyebrow">Current picture</span>
+          <h2>Key indicators</h2>
+        </div>
+
+        <p>
+          These figures will be populated from validated datasets rather
+          than maintained manually in the homepage code.
+        </p>
       </div>
+
       <div class="stats-grid">
-        <StatCard value="—" label="LWE-affected districts" />
-        <StatCard value="—" label="Violent incidents, latest year" />
-        <StatCard value="—" label="Civilian + security-force deaths" />
-        <StatCard value="—" label="Most LWE-affected districts" />
+        <StatCard
+          value="—"
+          label="LWE-affected districts"
+        />
+
+        <StatCard
+          value="—"
+          label="Violent incidents, latest year"
+        />
+
+        <StatCard
+          value="—"
+          label="Civilian + security-force deaths"
+        />
+
+        <StatCard
+          value="—"
+          label="Most LWE-affected districts"
+        />
       </div>
     </section>
 
-    <section class="section section-tint">
+    <!-- ARTICLES -->
+    <section
+      class="section section-tint"
+      id="articles"
+    >
       <div class="shell">
         <div class="section-head">
-          <div><span class="eyebrow">Articles</span><h2>Latest reporting and analysis</h2></div>
-          <p>One stream, with clear labels for News Desk, Analysis and Opinion.</p>
+          <div>
+            <span class="eyebrow">Articles</span>
+            <h2>Latest reporting and analysis</h2>
+          </div>
+
+          <p>
+            News Desk reporting and Opinions are published in one stream,
+            with each piece clearly labelled.
+          </p>
         </div>
-        <div class="feature-grid">
-          <article class="feature-card large"><span>News Desk</span><h3>Featured article title</h3><p>Articles will be managed as content entries, not hard-coded into the homepage.</p></article>
-          <article class="feature-card"><span>Analysis</span><h3>Latest analysis</h3></article>
-          <article class="feature-card"><span>Opinion</span><h3>Latest opinion</h3></article>
+
+        {featuredArticle ? (
+          <div class="article-feature-layout">
+            <!-- FEATURED ARTICLE -->
+          <a
+  class="article-feature-main"
+  href={articleUrl(featuredArticle.id)}
+>
+  {featuredArticle.data.cover && (
+    <div class="article-feature-image">
+      <img
+        src={featuredArticle.data.cover}
+        alt={featuredArticle.data.title}
+      />
+    </div>
+  )}
+
+  <div class="article-feature-content">
+    <span class="article-label">
+      {featuredArticle.data.section} · {featuredArticle.data.type}
+    </span>
+
+    <h3>{featuredArticle.data.title}</h3>
+
+    {featuredArticle.data.dek && (
+      <p>{featuredArticle.data.dek}</p>
+    )}
+
+    <div class="article-card-meta">
+      {featuredArticle.data.readTime ?? 'Read article'}
+      <span>→</span>
+    </div>
+  </div>
+</a>
+
+            <!-- OTHER LATEST ARTICLES -->
+            <div class="article-feature-list">
+              {latestArticles.map((article) => (
+                <a
+                  class="article-list-item"
+                  href={articleUrl(article.id)}
+                >
+                  <span>
+                    {article.data.section}
+                    {' · '}
+                    {article.data.type}
+                  </span>
+
+                  <h3>{article.data.title}</h3>
+
+                  {article.data.dek && (
+                    <p>{article.data.dek}</p>
+                  )}
+
+                  <small>
+                    {article.data.readTime ?? 'Read article'} →
+                  </small>
+                </a>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div class="empty-state">
+            <p>No articles have been published yet.</p>
+          </div>
+        )}
+
+        <div
+          class="visual-actions"
+          style="margin-top: 28px;"
+        >
+          <a href={pageUrl('articles/')}>
+            View all articles →
+          </a>
         </div>
       </div>
     </section>
 
-    <section class="section shell">
+    <!-- DATA & VISUALS -->
+    <section
+      class="section shell"
+      id="data-visuals"
+    >
       <div class="section-head">
-        <div><span class="eyebrow">Data & Visuals</span><h2>Geography, people and infrastructure</h2></div>
-        <p>The homepage will surface one flagship visual at a time; full dashboards live in Data & Visuals.</p>
+        <div>
+          <span class="eyebrow">Data & Visuals</span>
+          <h2>Geography, people and infrastructure</h2>
+        </div>
+
+        <p>
+          The homepage will surface one flagship visual at a time,
+          while complete dashboards will live in Data & Visuals.
+        </p>
       </div>
+
       <div class="visual-placeholder">
-        <div><strong>Interactive district map</strong><p>CSV/JSON-driven map with year slider, district status and source metadata.</p></div>
-        <div class="visual-actions"><a href="/data-visuals/">Open dashboard →</a></div>
+        <div>
+          <strong>Interactive district map</strong>
+
+          <p>
+            CSV/JSON-driven map with a year slider, district status,
+            historical contraction and source metadata.
+          </p>
+        </div>
+
+        <div class="visual-actions">
+          <a href={pageUrl('data-visuals/')}>
+            Open dashboard →
+          </a>
+        </div>
       </div>
     </section>
 
-    <section class="section section-dark">
+    <!-- TRACKING DEVELOPMENT -->
+    <section
+      class="section section-dark"
+      id="development"
+    >
       <div class="shell">
         <div class="section-head light">
-          <div><span class="eyebrow">Tracking Development</span><h2>What changes after violence declines?</h2></div>
-          <p>Roads, telecom, banking, education, health, rehabilitation and district-level progress.</p>
+          <div>
+            <span class="eyebrow">Tracking Development</span>
+            <h2>What changes after violence declines?</h2>
+          </div>
+
+          <p>
+            Roads, telecom, banking, education, health,
+            rehabilitation and district-level progress.
+          </p>
         </div>
+
         <div class="development-grid">
-          <div><strong>Roads & connectivity</strong><p>Year and district-level infrastructure progress.</p></div>
-          <div><strong>Telecom</strong><p>Network expansion and tower rollout.</p></div>
-          <div><strong>Public services</strong><p>Banking, post offices, education and health.</p></div>
-          <div><strong>Rehabilitation</strong><p>Surrenders, packages and reintegration indicators.</p></div>
+          <div>
+            <strong>Roads & connectivity</strong>
+            <p>
+              Year-wise and district-level infrastructure progress.
+            </p>
+          </div>
+
+          <div>
+            <strong>Telecom</strong>
+            <p>
+              Network expansion, tower rollout and connectivity.
+            </p>
+          </div>
+
+          <div>
+            <strong>Public services</strong>
+            <p>
+              Banking, post offices, education and health access.
+            </p>
+          </div>
+
+          <div>
+            <strong>Rehabilitation</strong>
+            <p>
+              Surrenders, rehabilitation packages and reintegration indicators.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section shell">
+    <!-- METHODOLOGY -->
+    <section
+      class="section shell"
+      id="methodology"
+    >
       <div class="section-head">
-        <div><span class="eyebrow">Methodology</span><h2>Three rules for every published figure</h2></div>
+        <div>
+          <span class="eyebrow">Methodology</span>
+          <h2>Three rules for every published figure</h2>
+        </div>
       </div>
+
       <div class="method-grid">
-        <div><span>01 / SOURCE</span><h3>Primary before secondary</h3><p>Official records, court documents and first-hand reporting are prioritised.</p></div>
-        <div><span>02 / DATE</span><h3>Every figure carries a reporting date</h3><p>Administrative classifications and totals change over time.</p></div>
-        <div><span>03 / VERIFICATION</span><h3>Claims are cross-checked</h3><p>Conflicting figures, data gaps and important uncertainty are made visible.</p></div>
+        <div>
+          <span>01 / SOURCE</span>
+          <h3>Primary before secondary</h3>
+
+          <p>
+            Official records, court documents and first-hand reporting
+            are prioritised wherever available.
+          </p>
+        </div>
+
+        <div>
+          <span>02 / DATE</span>
+          <h3>Every figure carries a reporting date</h3>
+
+          <p>
+            Administrative classifications and official totals change
+            over time and are presented with their reporting period.
+          </p>
+        </div>
+
+        <div>
+          <span>03 / VERIFICATION</span>
+          <h3>Claims are cross-checked</h3>
+
+          <p>
+            Conflicting figures, data gaps and important uncertainty
+            are made visible rather than silently reconciled.
+          </p>
+        </div>
       </div>
     </section>
   </main>
+
   <Footer />
 </BaseLayout>
