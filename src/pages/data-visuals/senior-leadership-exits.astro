@@ -147,6 +147,25 @@ function prettyDate(value) {
   .result-row strong{font-size:15px;color:#111b20}
   .table-wrap{overflow-x:auto;background:#fffdf8;border:1px solid #d9d1c3}
   .leader-table{width:100%;border-collapse:collapse;min-width:980px}
+  .table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 600px) {
+  .filters {
+    grid-template-columns: 1fr !important;
+  }
+
+  .filters input,
+  .filters select,
+  .filters button {
+    width: 100%;
+    min-height: 46px;
+    font-size: 16px;
+  }
+}
   .leader-table th{position:sticky;top:0;background:#e9e2d6;text-align:left;font:700 11px system-ui,sans-serif;text-transform:uppercase;letter-spacing:.055em;color:#514c46;padding:12px 10px;border-bottom:1px solid #d3cabe}
   .leader-table td{padding:9px 10px;border-bottom:1px solid #e5ded3;vertical-align:middle;font:500 13px/1.35 system-ui,sans-serif;color:#283239}
   .leader-table tbody tr:hover{background:#faf6ee}
@@ -160,4 +179,44 @@ function prettyDate(value) {
   .eyebrow{font:700 10px system-ui,sans-serif;text-transform:uppercase;letter-spacing:.11em;color:#9c4f37}
   @media(max-width:900px){.hero-grid{grid-template-columns:1fr}.portrait-collage{max-width:420px}.filters{grid-template-columns:1fr 1fr}.filters .search{grid-column:1/-1}.filters button{width:100%}}
   @media(max-width:560px){.dv-hero h1{font-size:43px}.filters{grid-template-columns:1fr}.filters .search{grid-column:auto}.table-headline{align-items:flex-start;flex-direction:column}.portrait-collage{grid-template-columns:repeat(3,1fr)}}
+@media (max-width: 600px) {
+  .intro {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  .intro h1 {
+    font-size: 44px !important;
+    line-height: 0.98 !important;
+    letter-spacing: -0.035em;
+    max-width: 100%;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .crumbs {
+    font-size: 9px;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+  }
+}
+@media (max-width: 600px) {
+  .intro-grid,
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .portrait-collage,
+  .hero-collage {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 22px;
+  }
+
+  .portrait-collage img,
+  .hero-collage img {
+    width: 100%;
+    height: auto;
+  }
+}
 </style>

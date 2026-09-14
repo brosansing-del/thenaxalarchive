@@ -296,36 +296,49 @@ const url = (path = '') =>
   /* MOBILE */
 
   @media (max-width: 900px) {
-
-    .header-inner {
-      min-height: auto;
-      padding-top: 18px;
-      padding-bottom: 18px;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 18px;
-    }
-
-    .main-nav {
-      width: 100%;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .nav-dropdown {
-      padding: 0;
-      margin: 0;
-    }
-
-    .dropdown-menu {
-      left: 0;
-      transform: translateY(8px);
-      width: min(440px, 90vw);
-    }
-
-    .nav-dropdown:hover .dropdown-menu,
-    .nav-dropdown:focus-within .dropdown-menu {
-      transform: translateY(0);
-    }
+  .header-inner {
+    min-height: auto;
+    padding-top: 18px;
+    padding-bottom: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
   }
+
+  .brand-name {
+    font-size: 25px;
+  }
+
+  .brand-sub {
+    font-size: 8px;
+  }
+
+  .main-nav {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    align-items: center;
+  }
+
+  .main-nav > a,
+  .nav-dropdown-trigger {
+    font-size: 14px;
+  }
+
+  .nav-dropdown {
+    padding: 0;
+    margin: 0;
+    position: relative;
+  }
+
+  /* Do NOT show desktop dropdown on phones */
+  .dropdown-menu {
+    display: none !important;
+  }
+
+  .chevron {
+    display: none;
+  }
+}
 </style>

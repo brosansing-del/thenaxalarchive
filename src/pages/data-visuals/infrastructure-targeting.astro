@@ -21,8 +21,7 @@ const annual = years.map((year) => ({
 }));
 const maxAnnual = Math.max(...annual.map((d) => d.total));
 const totalAll = records.reduce((s, r) => s + Number(r.count || 0), 0);
-const latestYear = years.at(-1);
-const latestTotal = annual.find((d) => d.year === latestYear)?.total ?? 0;
+
 ---
 <BaseLayout title="Infrastructure Targeting by LWE Outfits — The Naxal Archive" description="Interactive source-derived record of infrastructure targeted by LWE outfits, 2021–2025.">
   <Header />
@@ -37,7 +36,7 @@ const latestTotal = annual.find((d) => d.year === latestYear)?.total ?? 0;
       <div class="trend-card">
         <div class="card-head">
           <div><span class="eyebrow">Trend</span><h2>Recorded incidents by year</h2></div>
-          <div class="trend-summary"><strong>{latestTotal}</strong><span>in {latestYear}</span></div>
+         
         </div>
         <div class="trend-chart" aria-label="Annual infrastructure targeting incidents">
           {annual.map((d) => (
