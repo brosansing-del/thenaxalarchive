@@ -1,0 +1,54 @@
+year,state,infrastructure_type,count
+2021,Bihar,Govt. Building,1
+2021,Bihar,Mobile tower,1
+2021,Chhattisgarh,Road,15
+2021,Chhattisgarh,Railway,5
+2021,Chhattisgarh,Water plant (Govt. Building),1
+2021,Chhattisgarh,Forest / Irrigation,2
+2021,Chhattisgarh,Mobile tower,2
+2021,Chhattisgarh,Culvert (road),1
+2021,Chhattisgarh,Govt. Building,1
+2021,Chhattisgarh,Essar (mine),1
+2021,Chhattisgarh,NMDC (mine),1
+2021,Chhattisgarh,Mining,1
+2021,Jharkhand,Road,1
+2021,Jharkhand,Culvert (road),1
+2021,Jharkhand,Railway,3
+2021,Jharkhand,Mining,1
+2021,Jharkhand,Govt. Building,1
+2021,Madhya Pradesh,Road,3
+2021,Maharashtra,Road,1
+2021,Maharashtra,Forest,1
+2022,Chhattisgarh,Road,17
+2022,Chhattisgarh,Railway,2
+2022,Chhattisgarh,Mobile tower,13
+2022,Chhattisgarh,Culvert (road),1
+2022,Chhattisgarh,Mechanical Boat (road),1
+2022,Jharkhand,Bridge (road),1
+2022,Jharkhand,Mobile tower,4
+2022,Jharkhand,Railway,1
+2022,Maharashtra,Road,1
+2022,Maharashtra,Forest,1
+2023,Chhattisgarh,Road,18
+2023,Chhattisgarh,Railway,0
+2023,Chhattisgarh,Mobile tower,12
+2023,Chhattisgarh,NMDC,2
+2023,Jharkhand,Culvert,1
+2023,Jharkhand,Mobile tower,2
+2023,Jharkhand,Railway,1
+2023,Jharkhand,Panchayat Bhawan,1
+2023,Jharkhand,School Building,1
+2023,Kerala,Forest,1
+2023,Maharashtra,Bridge,1
+2023,Maharashtra,Forest,1
+2024,Chhattisgarh,Road,9
+2024,Chhattisgarh,Mobile tower,12
+2024,Jharkhand,Mobile tower,2
+2024,Madhya Pradesh,Forest,1
+2024,Telangana,Bridge,1
+2025,Chhattisgarh,Electric Pole,1
+2025,Chhattisgarh,Road,1
+2025,Chhattisgarh,Mobile tower,2
+2025,Jharkhand,Culvert,2
+2025,Jharkhand,Mobile tower,3
+2025,Odisha,Railway,2
