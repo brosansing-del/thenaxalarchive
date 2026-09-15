@@ -1,0 +1,754 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+
+const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '');
+
+const tenets = [
+  {
+    number: '01',
+    title: "A particular reading of Indian society",
+    summary: 'The starting diagnosis',
+    text: `CPI (Maoist) documents describe India as “semi-colonial and semi-feudal”. In this interpretation, formal political independence did not remove foreign economic influence, landlord power or unequal control over land and production. This is the organisation’s ideological assessment, not a neutral classification of contemporary India.`,
+  },
+  {
+    number: '02',
+    title: "Protracted People’s War",
+    summary: 'The route to power',
+    text: `The strategy adapts Mao’s revolutionary model to India. It envisages building organisation and armed capacity in rural areas, developing guerrilla zones and base areas, and attempting to expand influence toward towns and cities over a prolonged period. It rejects the idea of a single, immediate urban insurrection.`,
+  },
+  {
+    number: '03',
+    title: 'Agrarian revolution',
+    summary: 'The proposed social base',
+    text: `Land redistribution and the dismantling of landlord power are treated as central mobilising objectives. The doctrine assigns poor and landless peasants a leading place in the revolutionary alliance, while also seeking support among workers, Adivasi communities and other groups described as oppressed.`,
+  },
+  {
+    number: '04',
+    title: 'Armed struggle and political organisation',
+    summary: 'The primary method',
+    text: `The organisation treats armed struggle as the principal means of capturing state power. Party organisation, the People’s Liberation Guerrilla Army and mass or united-front activity are conceived as connected instruments. The Ministry of Home Affairs describes violence, mass mobilisation and strategic alliances as the principal components of this insurgency doctrine.`,
+  },
+  {
+    number: '05',
+    title: 'Rejection of parliamentarism',
+    summary: 'The break with electoral communism',
+    text: `Unlike the CPI and CPI(M), the Naxalite tradition represented here does not regard elections as the principal route to structural transformation. Parliamentary participation is portrayed in its documents as reinforcing the existing constitutional order. This dispute was central to the movement’s early separation from mainstream communist politics.`,
+  },
+  {
+    number: '06',
+    title: 'New Democratic Revolution',
+    summary: 'The stated political objective',
+    text: `The declared objective is a “New Democratic Revolution”: a transitional order led by an alliance of workers, peasants and other anti-feudal and anti-imperialist forces. In the party’s theoretical sequence, this stage would precede a later transition toward socialism and communism.`,
+  },
+  {
+    number: '07',
+    title: 'Parallel institutions',
+    summary: 'Doctrine applied territorially',
+    text: `In some areas of sustained influence, Maoist structures have attempted rudimentary parallel administration through Revolutionary People’s Committees, often referred to locally as Janatana Sarkars. Reported functions have included dispute settlement, mobilisation, local production and logistical support; their authority has also operated alongside armed coercion and the displacement of constitutional institutions.`,
+  },
+];
+---
+
+<BaseLayout
+  title="Ideology — The Naxal Archive"
+  description="An analytical guide to the ideological foundations, strategy and political objectives of the Naxalite and CPI (Maoist) movement in India."
+>
+  <Header />
+
+  <main class="ideology-page" id="top">
+    <section class="ideology-hero">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <a href={`${BASE}/background/`}>Background</a>
+            <span>/</span>
+            <span>Ideology</span>
+          </nav>
+
+          <span class="eyebrow">Doctrine · Strategy · Organisation</span>
+
+          <h1>How the movement explains its struggle.</h1>
+
+          <p>
+            Naxalite ideology combines a diagnosis of Indian society with a
+            strategy for seizing power. This page explains that doctrine as
+            articulated by the movement and places it beside the institutional
+            and practical context in which it operates.
+          </p>
+        </div>
+
+        <aside class="reading-note">
+          <span>Reading note</span>
+          <strong>Claim is not fact.</strong>
+          <p>
+            Terms such as “semi-feudal” and “people’s government” reproduce
+            the movement’s own conceptual language. Their use here does not
+            endorse those descriptions.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <nav class="section-nav" aria-label="On this page">
+      <div class="shell nav-inner">
+        <span>On this page</span>
+        <a href="#framework">Framework</a>
+        <a href="#pathway">Revolutionary pathway</a>
+        <a href="#tenets">Core tenets</a>
+        <a href="#perspectives">Two perspectives</a>
+        <a href="#sources">Sources</a>
+      </div>
+    </nav>
+
+    <section class="section-block" id="framework">
+      <div class="shell split-heading">
+        <div>
+          <span class="eyebrow">Theoretical foundation</span>
+          <h2>Marxism–Leninism–Maoism, adapted to India</h2>
+        </div>
+
+        <div class="prose">
+          <p>
+            CPI (Maoist) identifies Marxism–Leninism–Maoism as its ideological
+            basis. From Marxism it draws an account of class conflict; from
+            Leninism, the concept of a disciplined revolutionary party; and
+            from Maoism, the central role of the peasantry, guerrilla warfare
+            and rural base areas.
+          </p>
+          <p>
+            Its programme applies these ideas through a specific diagnosis:
+            India is characterised in party documents as a society where
+            landlordism, domestic big capital and imperial influence remain
+            structurally dominant. The organisation consequently argues that
+            the constitutional system must be overthrown rather than reformed.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pathway-section" id="pathway">
+      <div class="shell">
+        <div class="section-title-row">
+          <div>
+            <span class="eyebrow">Strategic logic</span>
+            <h2>The revolutionary pathway</h2>
+          </div>
+          <p>
+            A simplified reading of the sequence described in Maoist strategy
+            documents. In practice, stages can overlap or reverse.
+          </p>
+        </div>
+
+        <ol class="pathway" aria-label="Simplified revolutionary pathway">
+          <li>
+            <span>01</span>
+            <strong>Organise</strong>
+            <p>Build clandestine party and mass networks around local grievances.</p>
+          </li>
+          <li>
+            <span>02</span>
+            <strong>Guerrilla zones</strong>
+            <p>Develop armed units and contest state presence in selected rural areas.</p>
+          </li>
+          <li>
+            <span>03</span>
+            <strong>Base areas</strong>
+            <p>Seek durable territorial influence and parallel political structures.</p>
+          </li>
+          <li>
+            <span>04</span>
+            <strong>Expand</strong>
+            <p>Attempt to connect rural bases, strengthen forces and approach urban centres.</p>
+          </li>
+          <li>
+            <span>05</span>
+            <strong>Capture power</strong>
+            <p>Pursue a New Democratic state as the proposed transition toward socialism.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="tenets-section" id="tenets">
+      <div class="shell tenets-layout">
+        <div class="tenets-intro">
+          <span class="eyebrow">Core tenets</span>
+          <h2>Open each idea</h2>
+          <p>
+            The concepts are connected: the diagnosis of society provides the
+            justification, protracted war supplies the strategy, and the New
+            Democratic Revolution defines the stated objective.
+          </p>
+        </div>
+
+        <div class="tenet-list">
+          {tenets.map((tenet, index) => (
+            <details class="tenet" open={index === 0}>
+              <summary>
+                <span class="tenet-number">{tenet.number}</span>
+                <span class="tenet-heading">
+                  <strong>{tenet.title}</strong>
+                  <small>{tenet.summary}</small>
+                </span>
+                <span class="toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="tenet-body">
+                <p>{tenet.text}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="perspectives-section" id="perspectives">
+      <div class="shell">
+        <div class="section-title-row light">
+          <div>
+            <span class="eyebrow">Analytical caution</span>
+            <h2>Two perspectives on the same doctrine</h2>
+          </div>
+          <p>
+            Separating the organisation’s claims from the state’s assessment
+            makes the underlying disagreement visible.
+          </p>
+        </div>
+
+        <div class="perspective-grid">
+          <article>
+            <span>Movement’s stated position</span>
+            <h3>Revolution against structural domination</h3>
+            <p>
+              CPI (Maoist) presents armed revolution as a response to unequal
+              land relations, exploitation, displacement and the exclusion of
+              marginalised communities. It describes parallel institutions as
+              forms of popular power emerging from rural base areas.
+            </p>
+          </article>
+
+          <article>
+            <span>Government of India’s position</span>
+            <h3>Violent insurgency against constitutional government</h3>
+            <p>
+              The Ministry of Home Affairs describes CPI (Maoist) as a banned
+              organisation seeking to overthrow the democratic state through
+              violence. It argues that armed coercion, killings and attacks on
+              infrastructure undermine local rights, services and development.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="sources-section" id="sources">
+      <div class="shell sources-grid">
+        <div>
+          <span class="eyebrow">Source trail</span>
+          <h2>Documents used for this overview</h2>
+        </div>
+
+        <div class="source-list">
+          <a
+            href="https://www.mha.gov.in/en/divisionofmha/left-wing-extremism-division"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span>Government source</span>
+            <strong>Ministry of Home Affairs — Left Wing Extremism Division</strong>
+            <small>Institutional assessment, terminology and policy context ↗</small>
+          </a>
+
+          <a
+            href="https://www.mha.gov.in/sites/default/files/2025-12/FAQs_LWE_18122025.pdf"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span>Government source</span>
+            <strong>Ministry of Home Affairs — LWE Frequently Asked Questions</strong>
+            <small>Doctrine, organisation and Revolutionary People’s Committees ↗</small>
+          </a>
+
+          <a
+            href="https://archive.org/details/strategy-tactics-of-the-indian-revolution-central-committee-p-communist-party-of-india-maoist"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span>Movement document · archived copy</span>
+            <strong>Strategy and Tactics of the Indian Revolution</strong>
+            <small>CPI (Maoist)’s own description of doctrine and strategy ↗</small>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="next-section">
+      <div class="shell next-inner">
+        <a href={`${BASE}/background/history/`}>
+          <span>Previous section</span>
+          <strong>← History</strong>
+        </a>
+
+        <a href={`${BASE}/background/major-incidents/`}>
+          <span>Next section</span>
+          <strong>Major Incidents →</strong>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  html { scroll-behavior: smooth; }
+
+  .ideology-page {
+    --ink: #111b20;
+    --paper: #f3efe5;
+    --paper-light: #fffdf8;
+    --line: #cec6b8;
+    --rust: #a34f32;
+    --forest: #172327;
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .ideology-page section,
+  .ideology-page nav { scroll-margin-top: 90px; }
+
+  .eyebrow {
+    font: 800 11px/1.2 system-ui, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: var(--rust);
+  }
+
+  .ideology-hero {
+    padding: 70px 0 64px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(260px, .55fr);
+    gap: 72px;
+    align-items: end;
+  }
+
+  .breadcrumbs {
+    display: flex;
+    gap: 9px;
+    margin-bottom: 54px;
+    font: 700 12px/1 system-ui, sans-serif;
+    color: #7b756c;
+  }
+
+  .breadcrumbs a { color: inherit; text-decoration: none; }
+  .breadcrumbs a:hover { color: var(--rust); }
+
+  .hero-copy h1 {
+    max-width: 850px;
+    margin: 13px 0 24px;
+    font: 700 clamp(54px, 7vw, 92px)/.93 Georgia, serif;
+    letter-spacing: -.05em;
+  }
+
+  .hero-copy > p {
+    max-width: 760px;
+    margin: 0;
+    font: 400 20px/1.55 Georgia, serif;
+    color: #5f5d57;
+  }
+
+  .reading-note {
+    padding: 24px;
+    border-top: 3px solid var(--rust);
+    background: #e9e2d6;
+  }
+
+  .reading-note > span {
+    display: block;
+    margin-bottom: 28px;
+    font: 800 10px/1 system-ui, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: var(--rust);
+  }
+
+  .reading-note strong {
+    display: block;
+    font: 700 25px/1.05 Georgia, serif;
+  }
+
+  .reading-note p {
+    margin: 14px 0 0;
+    font: 400 15px/1.55 Georgia, serif;
+    color: #625f59;
+  }
+
+  .section-nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    border-bottom: 1px solid var(--line);
+    background: rgba(235, 229, 217, .96);
+    backdrop-filter: blur(10px);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    min-height: 58px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav-inner::-webkit-scrollbar { display: none; }
+
+  .nav-inner span,
+  .nav-inner a {
+    flex: 0 0 auto;
+    font: 800 11px/1 system-ui, sans-serif;
+    text-decoration: none;
+  }
+
+  .nav-inner span {
+    padding-right: 28px;
+    border-right: 1px solid var(--line);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--rust);
+  }
+
+  .nav-inner a { color: var(--ink); }
+  .nav-inner a:hover { color: var(--rust); }
+
+  .section-block { padding: 84px 0; }
+
+  .split-heading {
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    gap: 90px;
+  }
+
+  .split-heading h2,
+  .section-title-row h2,
+  .tenets-intro h2,
+  .sources-grid h2 {
+    margin: 10px 0 0;
+    font: 700 clamp(40px, 5vw, 62px)/.98 Georgia, serif;
+    letter-spacing: -.035em;
+  }
+
+  .prose p {
+    margin: 0 0 22px;
+    font: 400 18px/1.7 Georgia, serif;
+    color: #55534e;
+  }
+
+  .pathway-section {
+    padding: 72px 0 78px;
+    border-block: 1px solid var(--line);
+    background: #e9e2d6;
+  }
+
+  .section-title-row {
+    display: grid;
+    grid-template-columns: 1fr minmax(280px, 460px);
+    gap: 70px;
+    align-items: end;
+    margin-bottom: 44px;
+  }
+
+  .section-title-row > p {
+    margin: 0;
+    font: 400 16px/1.6 Georgia, serif;
+    color: #65615a;
+  }
+
+  .pathway {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid #bdb3a5;
+    border-left: 1px solid #bdb3a5;
+    list-style: none;
+  }
+
+  .pathway li {
+    min-height: 245px;
+    padding: 22px;
+    border-right: 1px solid #bdb3a5;
+    border-bottom: 1px solid #bdb3a5;
+  }
+
+  .pathway li > span {
+    display: block;
+    margin-bottom: 58px;
+    font: 800 10px/1 system-ui, sans-serif;
+    color: var(--rust);
+  }
+
+  .pathway strong {
+    display: block;
+    font: 700 23px/1.05 Georgia, serif;
+  }
+
+  .pathway p {
+    margin: 12px 0 0;
+    font: 400 14px/1.55 Georgia, serif;
+    color: #625f59;
+  }
+
+  .tenets-section { padding: 88px 0 96px; }
+
+  .tenets-layout {
+    display: grid;
+    grid-template-columns: minmax(250px, .68fr) minmax(0, 1.32fr);
+    gap: 84px;
+    align-items: start;
+  }
+
+  .tenets-intro {
+    position: sticky;
+    top: 90px;
+  }
+
+  .tenets-intro p {
+    margin: 22px 0 0;
+    font: 400 16px/1.65 Georgia, serif;
+    color: #65615a;
+  }
+
+  .tenet { border-top: 1px solid var(--line); }
+  .tenet:last-child { border-bottom: 1px solid var(--line); }
+
+  .tenet summary {
+    display: grid;
+    grid-template-columns: 42px 1fr 28px;
+    gap: 18px;
+    align-items: center;
+    padding: 25px 0;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .tenet summary::-webkit-details-marker { display: none; }
+
+  .tenet-number {
+    font: 800 10px/1 system-ui, sans-serif;
+    color: var(--rust);
+  }
+
+  .tenet-heading strong {
+    display: block;
+    font: 700 26px/1.08 Georgia, serif;
+  }
+
+  .tenet-heading small {
+    display: block;
+    margin-top: 7px;
+    font: 700 11px/1.2 system-ui, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: #817a70;
+  }
+
+  .toggle {
+    position: relative;
+    width: 24px;
+    height: 24px;
+  }
+
+  .toggle::before,
+  .toggle::after {
+    content: '';
+    position: absolute;
+    top: 11px;
+    left: 5px;
+    width: 14px;
+    height: 2px;
+    background: var(--ink);
+  }
+
+  .toggle::after { transform: rotate(90deg); transition: transform .2s ease; }
+  .tenet[open] .toggle::after { transform: rotate(0); }
+
+  .tenet-body {
+    padding: 0 46px 28px 60px;
+    animation: reveal .2s ease;
+  }
+
+  .tenet-body p {
+    max-width: 680px;
+    margin: 0;
+    font: 400 17px/1.7 Georgia, serif;
+    color: #56534e;
+  }
+
+  @keyframes reveal {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .perspectives-section {
+    padding: 82px 0 90px;
+    background: var(--forest);
+    color: #fffdf8;
+  }
+
+  .section-title-row.light > p { color: #bdc5c2; }
+
+  .perspective-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid #506065;
+    border-left: 1px solid #506065;
+  }
+
+  .perspective-grid article {
+    min-height: 340px;
+    padding: 30px;
+    border-right: 1px solid #506065;
+    border-bottom: 1px solid #506065;
+  }
+
+  .perspective-grid span {
+    display: block;
+    margin-bottom: 74px;
+    font: 800 10px/1 system-ui, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: #d69b78;
+  }
+
+  .perspective-grid h3 {
+    max-width: 480px;
+    margin: 0 0 18px;
+    font: 700 34px/1.03 Georgia, serif;
+    letter-spacing: -.025em;
+  }
+
+  .perspective-grid p {
+    max-width: 510px;
+    margin: 0;
+    font: 400 16px/1.65 Georgia, serif;
+    color: #cbd1cf;
+  }
+
+  .sources-section { padding: 82px 0; }
+
+  .sources-grid {
+    display: grid;
+    grid-template-columns: minmax(250px, .72fr) minmax(0, 1.28fr);
+    gap: 84px;
+  }
+
+  .source-list { border-top: 1px solid var(--line); }
+
+  .source-list a {
+    display: block;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .source-list a > span {
+    display: block;
+    margin-bottom: 9px;
+    font: 800 10px/1 system-ui, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--rust);
+  }
+
+  .source-list strong {
+    display: block;
+    font: 700 20px/1.2 Georgia, serif;
+  }
+
+  .source-list small {
+    display: block;
+    margin-top: 8px;
+    font: 600 12px/1.4 system-ui, sans-serif;
+    color: #746e65;
+  }
+
+  .source-list a:hover strong { color: var(--rust); }
+
+  .next-section {
+    border-top: 1px solid var(--line);
+    background: #e9e2d6;
+  }
+
+  .next-inner {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .next-inner a {
+    padding: 34px 0;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .next-inner a:last-child { text-align: right; }
+
+  .next-inner span {
+    display: block;
+    margin-bottom: 8px;
+    font: 800 10px/1 system-ui, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--rust);
+  }
+
+  .next-inner strong { font: 700 24px/1 Georgia, serif; }
+
+  @media (max-width: 900px) {
+    .hero-grid,
+    .split-heading,
+    .tenets-layout,
+    .sources-grid { grid-template-columns: 1fr; gap: 40px; }
+    .reading-note { max-width: 520px; }
+    .pathway { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tenets-intro { position: static; }
+  }
+
+  @media (max-width: 600px) {
+    .ideology-hero { padding: 42px 0 40px; }
+    .breadcrumbs { margin-bottom: 36px; }
+    .hero-copy h1 { font-size: 49px; }
+    .hero-copy > p { font-size: 17px; }
+    .nav-inner { gap: 20px; }
+    .nav-inner span { display: none; }
+    .section-block,
+    .tenets-section,
+    .sources-section { padding: 54px 0; }
+    .section-title-row { grid-template-columns: 1fr; gap: 20px; }
+    .pathway-section,
+    .perspectives-section { padding: 54px 0; }
+    .pathway,
+    .perspective-grid,
+    .next-inner { grid-template-columns: 1fr; }
+    .pathway li { min-height: 210px; }
+    .pathway li > span { margin-bottom: 42px; }
+    .tenet summary { grid-template-columns: 32px 1fr 24px; gap: 12px; }
+    .tenet-heading strong { font-size: 22px; }
+    .tenet-body { padding: 0 0 25px 44px; }
+    .perspective-grid article { min-height: 300px; padding: 25px; }
+    .perspective-grid span { margin-bottom: 48px; }
+    .perspective-grid h3 { font-size: 30px; }
+    .next-inner a:last-child { border-top: 1px solid var(--line); text-align: left; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .tenet-body { animation: none; }
+  }
+</style>
