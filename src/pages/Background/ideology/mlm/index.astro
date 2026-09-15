@@ -1,0 +1,43 @@
+---
+import DoctrinePage from '../../../../components/DoctrinePage.astro';
+
+const sections = [
+  { id:'integrated-whole', number:'01', title:'An integrated ideological system', summary:'How the document defines MLM', paragraphs:[
+    'The document presents Marxism-Leninism-Maoism as a single, developing body of doctrine rather than three unrelated theories. It describes Marxism as the first stage, Leninism as its development under imperialism and revolutionary conditions, and Maoism as a further stage derived from the Chinese revolution and later ideological struggles.',
+    'This is the party document’s self-description. Terms such as “science” and “higher stage” express its ideological claims and should not be read as independent scholarly judgments.'
+  ]},
+  { id:'marxism', number:'02', title:'What it takes from Marxism', summary:'Class, political economy and materialism', paragraphs:[
+    'The text identifies three principal fields: dialectical and historical materialism, political economy, and scientific socialism. It treats class struggle as the driving force of societies divided by class and assigns the industrial working class a leading revolutionary role.',
+    'Its economic account emphasises private ownership, wage labour, surplus value and the concentration of capital. Its political conclusion is that class domination cannot be ended without replacing the existing state and property order.'
+  ], points:['Dialectical and historical materialism as a method of analysis','Class struggle as the central mechanism of historical change','Surplus value as an explanation of capitalist exploitation','A revolutionary party representing the proletariat']},
+  { id:'leninism', number:'03', title:'What it takes from Leninism', summary:'Imperialism, party and revolutionary state', paragraphs:[
+    'Leninism is presented as Marxism developed for the era of monopoly capitalism and imperialism. The document highlights Lenin’s theory of imperialism, the possibility of revolutionary breakthroughs at weak points in the international system, and the need for a disciplined vanguard party.',
+    'It also adopts Lenin’s rejection of a peaceful parliamentary transition as a general route to socialism and his conception of a transitional state led by the working class.'
+  ], points:['Imperialism as a stage of concentrated monopoly capital','A centralised vanguard party','Worker-peasant alliance','Revolutionary seizure rather than electoral transfer of power']},
+  { id:'maoism', number:'04', title:'What it takes from Maoism', summary:'Peasantry, people’s war and mass line', paragraphs:[
+    'The document treats Maoism as especially relevant to agrarian societies. It gives the peasantry a central role under proletarian leadership and links political organisation to a protracted struggle beginning in the countryside.',
+    'It also emphasises the “mass line”, criticism and self-criticism, the political control of armed formations, a multi-class united front, and continued class struggle after a socialist revolution.'
+  ], points:['Protracted People’s War and rural base areas','New Democratic Revolution','Party, people’s army and united front as three connected instruments','Mass line and rectification','Continued revolution under socialism']},
+  { id:'india', number:'05', title:'Application to India', summary:'The bridge from theory to programme', paragraphs:[
+    'The final move in the document is from general doctrine to the Indian conflict. It connects agrarian revolution, guerrilla zones, a people’s army and rural base areas with the objective of encircling cities and completing a New Democratic Revolution.',
+    'This framework underpins the party programme and constitution. It explains why land, rural mobilisation, armed organisation and rejection of parliamentarism appear repeatedly across all three founding texts.'
+  ]},
+];
+---
+
+<DoctrinePage
+  title="Ideological Foundations of CPI (Maoist)"
+  pageTitle="Ideological Foundations of CPI Maoist — The Naxal Archive"
+  description="A neutral guide to the ideological framework presented in the CPI Maoist document Hold High the Bright Red Banner of Marxism Leninism Maoism."
+  eyebrow="Foundational text · Ideology"
+  dek="How CPI (Maoist) combines ideas associated with Marx, Lenin and Mao and applies them to its revolutionary strategy in India."
+  documentTitle="Hold High the Bright Red Banner of Marxism–Leninism–Maoism"
+  documentDate="Circulated in the merger-era corpus; supplied copy saved in 2007"
+  documentType="Ideological statement"
+  editorialNote="This page summarises the document’s arguments without reproducing its celebratory language. Assertions about history, society and political legitimacy are attributed to the document rather than presented as established fact."
+  sections={sections}
+  relatedLinks={[
+    {label:'Political application',title:'Political Programme for India',href:'/background/ideology/party-programme/'},
+    {label:'Organisational application',title:'Organisation and Internal Control',href:'/background/ideology/party-constitution/'},
+  ]}
+/>

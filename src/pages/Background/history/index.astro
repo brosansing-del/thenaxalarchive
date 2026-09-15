@@ -1,0 +1,1027 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+
+const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '');
+
+const phases = [
+  {
+    id: 'naxalbari',
+    number: '01',
+    year: '1967',
+    title: 'Naxalbari',
+    text: `A peasant uprising in a village in West Bengal's Darjeeling district gives the movement its name. The episode becomes the symbolic starting point of the Naxalite movement and marks a break by revolutionary communist cadres from the parliamentary communist mainstream.`,
+  },
+  {
+    id: 'cpi-ml',
+    number: '02',
+    year: '1969–72',
+    title: 'CPI(ML) and early fragmentation',
+    text: `The Communist Party of India (Marxist-Leninist) emerges around an armed revolutionary strategy. State suppression, leadership losses and internal divisions fragment the organisation within a few years.`,
+  },
+  {
+    id: 'pwg-mcc',
+    number: '03',
+    year: '1980s',
+    title: 'PWG and MCC consolidation',
+    text: `The People's War Group develops a strong organisational base in Andhra Pradesh, while the Maoist Communist Centre operates separately from Bihar and later Jharkhand. The movement's centre of gravity increasingly shifts toward the forested and tribal belts of central and eastern India.`,
+  },
+  {
+    id: 'convergence',
+    number: '04',
+    year: '1990s–2004',
+    title: 'Expansion and convergence',
+    text: `Separate Maoist formations expand across several parts of central and eastern India. Organisational consolidation, movement across adjoining state borders and the growth of forest-based operating areas gradually bring the principal formations closer together.`,
+  },
+  {
+    id: 'cpi-maoist',
+    number: '05',
+    year: '2004–2010',
+    title: 'CPI (Maoist) and wider expansion',
+    text: `The merger of the People's War Group and the Maoist Communist Centre creates the Communist Party of India (Maoist). The new organisation consolidates leadership and armed structures across a wider geographical belt.`,
+  },
+  {
+    id: 'contraction',
+    number: '06',
+    year: '2011–Present',
+    title: 'Contraction and transformation',
+    text: `Sustained security pressure, leadership losses, surrenders, infrastructure expansion and deeper administrative access reshape the movement's geography and operating space. The conflict increasingly becomes concentrated in a smaller number of areas.`,
+  },
+];
+---
+
+<BaseLayout
+  title="Background — History of the Naxalite Movement"
+  description="A phase-wise history of the Naxalite movement in India from Naxalbari in 1967 to its later contraction and transformation."
+>
+  <Header />
+
+  <main class="background-page" id="top">
+
+    <!-- HERO -->
+    <section class="background-hero">
+      <div class="shell hero-inner">
+
+        <div class="hero-copy">
+          <span class="eyebrow">Background · History</span>
+
+          <h1>
+            History of the
+            Naxalite movement.
+          </h1>
+
+          <p>
+            Five decades, in phases. Each phase marks a shift in leadership,
+            geography or method — not a clean break.
+          </p>
+        </div>
+
+        <aside class="hero-index">
+          <span>Historical record</span>
+          <strong>1967 → Present</strong>
+          <p>
+            Scroll through the phases or select a period below.
+          </p>
+        </aside>
+
+      </div>
+    </section>
+
+
+    <!-- QUICK PHASE NAV -->
+    <section class="phase-nav-section">
+      <div class="shell">
+
+        <div class="phase-nav">
+
+          {phases.map((phase) => (
+            <a href={`#${phase.id}`}>
+              <span>{phase.year}</span>
+              <strong>{phase.title}</strong>
+            </a>
+          ))}
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- HISTORY RECORD -->
+    <section class="history-record">
+      <div class="shell">
+
+        <div class="record-intro">
+
+          <div>
+            <span class="eyebrow">Historical record</span>
+            <h2>
+              The movement through six phases
+            </h2>
+          </div>
+
+          <p>
+            The periods below are analytical markers rather than rigid
+            boundaries. Organisations, leaders and regional networks often
+            overlap across phases.
+          </p>
+
+        </div>
+
+
+        <div class="timeline">
+
+          {phases.map((phase) => (
+
+            <article
+              class="timeline-entry"
+              id={phase.id}
+            >
+
+              <div class="timeline-marker">
+                <span>{phase.number}</span>
+                <i></i>
+              </div>
+
+
+              <div class="timeline-date">
+                {phase.year}
+              </div>
+
+
+              <div class="timeline-content">
+
+                <h3>
+                  {phase.title}
+                </h3>
+
+                <p>
+                  {phase.text}
+                </p>
+
+                <div class="timeline-actions">
+                  <a href="#top">
+                    Back to top ↑
+                  </a>
+                </div>
+
+              </div>
+
+            </article>
+
+          ))}
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- NEXT SECTION -->
+    <section class="background-next">
+      <div class="shell next-grid">
+
+        <div>
+          <span class="eyebrow">
+            Continue exploring
+          </span>
+
+          <h2>
+            From historical evolution to structured data.
+          </h2>
+        </div>
+
+        <div class="next-links">
+
+          <a href={`${BASE}/data-visuals/`}>
+            <span>Data & Visuals</span>
+            <strong>Explore datasets →</strong>
+          </a>
+
+          <a href={`${BASE}/articles/`}>
+            <span>Articles</span>
+            <strong>Read analysis →</strong>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+
+<style>
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+
+  .background-page {
+    background: #f3efe5;
+    color: #111b20;
+  }
+
+
+  .background-page .shell {
+    max-width: 1180px;
+  }
+
+
+  /* HERO */
+
+  .background-hero {
+    padding: 72px 0 64px;
+
+    border-bottom:
+      1px solid #cec6b8;
+  }
+
+
+  .hero-inner {
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 1.45fr)
+      minmax(250px, .55fr);
+
+    gap: 80px;
+
+    align-items: end;
+  }
+
+
+  .eyebrow {
+    font-family:
+      system-ui,
+      sans-serif;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: .12em;
+
+    color: #a34f32;
+  }
+
+
+  .hero-copy h1 {
+    max-width: 800px;
+
+    margin:
+      12px
+      0
+      24px;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size:
+      clamp(
+        56px,
+        7vw,
+        94px
+      );
+
+    font-weight: 700;
+
+    line-height: .92;
+
+    letter-spacing: -.045em;
+  }
+
+
+  .hero-copy > p {
+    max-width: 660px;
+
+    margin: 0;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size: 20px;
+
+    line-height: 1.55;
+
+    color: #62615c;
+  }
+
+
+  .hero-index {
+    border-left:
+      3px solid #a65b3f;
+
+    padding:
+      8px
+      0
+      8px
+      24px;
+  }
+
+
+  .hero-index > span {
+    display: block;
+
+    margin-bottom: 10px;
+
+    font-family:
+      system-ui,
+      sans-serif;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: .12em;
+
+    text-transform: uppercase;
+
+    color: #8f877c;
+  }
+
+
+  .hero-index strong {
+    display: block;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size: 27px;
+
+    line-height: 1.1;
+  }
+
+
+  .hero-index p {
+    max-width: 230px;
+
+    margin:
+      14px
+      0
+      0;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    color: #69655f;
+  }
+
+
+  /* QUICK NAV */
+
+  .phase-nav-section {
+    padding:
+      22px
+      0;
+
+    background: #ebe5d9;
+
+    border-bottom:
+      1px solid #cec6b8;
+  }
+
+
+  .phase-nav {
+    display: grid;
+
+    grid-template-columns:
+      repeat(
+        6,
+        minmax(0, 1fr)
+      );
+  }
+
+
+  .phase-nav a {
+    min-width: 0;
+
+    padding:
+      10px
+      15px;
+
+    border-right:
+      1px solid #cec6b8;
+
+    color: #111b20;
+
+    text-decoration: none;
+  }
+
+
+  .phase-nav a:first-child {
+    border-left:
+      1px solid #cec6b8;
+  }
+
+
+  .phase-nav span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-family:
+      system-ui,
+      sans-serif;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: .1em;
+
+    text-transform: uppercase;
+
+    color: #9b4d34;
+  }
+
+
+  .phase-nav strong {
+    display: block;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size: 13px;
+
+    line-height: 1.25;
+  }
+
+
+  @media
+  (hover: hover)
+  and
+  (pointer: fine) {
+
+    .phase-nav a:hover {
+      background: #172327;
+      color: #fffdf8;
+    }
+
+  }
+
+
+  /* RECORD INTRO */
+
+  .history-record {
+    padding:
+      72px
+      0
+      84px;
+  }
+
+
+  .record-intro {
+    display: grid;
+
+    grid-template-columns:
+      1.1fr
+      .9fr;
+
+    gap: 70px;
+
+    align-items: end;
+
+    margin-bottom: 64px;
+  }
+
+
+  .record-intro h2 {
+    max-width: 650px;
+
+    margin:
+      8px
+      0
+      0;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size:
+      clamp(
+        38px,
+        5vw,
+        58px
+      );
+
+    line-height: .98;
+
+    letter-spacing: -.035em;
+  }
+
+
+  .record-intro > p {
+    max-width: 510px;
+
+    margin: 0;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+
+    color: #68645e;
+  }
+
+
+  /* TIMELINE */
+
+  .timeline {
+    border-top:
+      1px solid #c9c0b3;
+  }
+
+
+  .timeline-entry {
+    scroll-margin-top: 110px;
+
+    display: grid;
+
+    grid-template-columns:
+      72px
+      170px
+      minmax(0, 1fr);
+
+    gap: 28px;
+
+    min-height: 310px;
+
+    padding:
+      44px
+      0;
+
+    border-bottom:
+      1px solid #c9c0b3;
+  }
+
+
+  .timeline-marker {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+  }
+
+
+  .timeline-marker span {
+    position: relative;
+
+    z-index: 2;
+
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: #172327;
+
+    color: #fffdf8;
+
+    font-family:
+      system-ui,
+      sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 800;
+  }
+
+
+  .timeline-marker i {
+    position: absolute;
+
+    top: 42px;
+    bottom: -44px;
+
+    width: 1px;
+
+    background: #bdb4a6;
+  }
+
+
+  .timeline-entry:last-child
+  .timeline-marker i {
+    display: none;
+  }
+
+
+  .timeline-date {
+    padding-top: 6px;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size: 26px;
+
+    font-weight: 700;
+
+    color: #9c4f37;
+  }
+
+
+  .timeline-content {
+    max-width: 700px;
+  }
+
+
+  .timeline-content h3 {
+    margin:
+      0
+      0
+      18px;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size:
+      clamp(
+        34px,
+        4vw,
+        49px
+      );
+
+    line-height: 1;
+
+    letter-spacing: -.03em;
+  }
+
+
+  .timeline-content p {
+    max-width: 660px;
+
+    margin: 0;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size: 17px;
+
+    line-height: 1.65;
+
+    color: #61615c;
+  }
+
+
+  .timeline-actions {
+    margin-top: 28px;
+  }
+
+
+  .timeline-actions a {
+    font-family:
+      system-ui,
+      sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: .06em;
+
+    text-transform: uppercase;
+
+    color: #111b20;
+
+    text-decoration: none;
+  }
+
+
+  /* NEXT */
+
+  .background-next {
+    padding:
+      60px
+      0;
+
+    background: #172327;
+
+    color: #fffdf8;
+  }
+
+
+  .next-grid {
+    display: grid;
+
+    grid-template-columns:
+      1.2fr
+      .8fr;
+
+    gap: 70px;
+
+    align-items: end;
+  }
+
+
+  .background-next .eyebrow {
+    color: #d19775;
+  }
+
+
+  .background-next h2 {
+    max-width: 680px;
+
+    margin:
+      10px
+      0
+      0;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size:
+      clamp(
+        36px,
+        4.5vw,
+        56px
+      );
+
+    line-height: 1;
+
+    letter-spacing: -.035em;
+  }
+
+
+  .next-links {
+    display: grid;
+
+    gap: 10px;
+  }
+
+
+  .next-links a {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding:
+      18px
+      0;
+
+    border-bottom:
+      1px solid #4d5a5d;
+
+    color: #fffdf8;
+
+    text-decoration: none;
+  }
+
+
+  .next-links span {
+    font-family:
+      system-ui,
+      sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: .1em;
+
+    color: #aeb8b8;
+  }
+
+
+  .next-links strong {
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size: 16px;
+  }
+
+
+  /* TABLET */
+
+  @media (max-width: 900px) {
+
+    .hero-inner {
+      grid-template-columns: 1fr;
+
+      gap: 38px;
+    }
+
+
+    .hero-index {
+      max-width: 460px;
+    }
+
+
+    .phase-nav {
+      grid-template-columns:
+        repeat(
+          3,
+          1fr
+        );
+
+      gap: 1px;
+
+      background: #cec6b8;
+    }
+
+
+    .phase-nav a {
+      background: #ebe5d9;
+
+      border: 0;
+    }
+
+
+    .record-intro {
+      grid-template-columns: 1fr;
+
+      gap: 24px;
+    }
+
+
+    .timeline-entry {
+      grid-template-columns:
+        58px
+        130px
+        minmax(0, 1fr);
+    }
+
+
+    .next-grid {
+      grid-template-columns: 1fr;
+
+      gap: 34px;
+    }
+
+  }
+
+
+  /* IPHONE */
+
+  @media (max-width: 600px) {
+
+    .background-hero {
+      padding:
+        42px
+        0
+        40px;
+    }
+
+
+    .hero-copy h1 {
+      font-size: 48px;
+
+      line-height: .95;
+    }
+
+
+    .hero-copy > p {
+      font-size: 17px;
+    }
+
+
+    .phase-nav {
+      grid-template-columns:
+        repeat(
+          2,
+          1fr
+        );
+    }
+
+
+    .phase-nav a {
+      min-height: 84px;
+
+      padding: 13px;
+    }
+
+
+    .history-record {
+      padding:
+        48px
+        0
+        60px;
+    }
+
+
+    .record-intro {
+      margin-bottom: 42px;
+    }
+
+
+    .record-intro h2 {
+      font-size: 40px;
+    }
+
+
+    .timeline-entry {
+      grid-template-columns:
+        46px
+        minmax(0, 1fr);
+
+      gap:
+        10px
+        16px;
+
+      min-height: 0;
+
+      padding:
+        34px
+        0;
+    }
+
+
+    .timeline-marker {
+      grid-row:
+        1 / span 2;
+    }
+
+
+    .timeline-marker span {
+      width: 36px;
+      height: 36px;
+    }
+
+
+    .timeline-marker i {
+      top: 36px;
+      bottom: -34px;
+    }
+
+
+    .timeline-date {
+      grid-column: 2;
+
+      font-size: 19px;
+    }
+
+
+    .timeline-content {
+      grid-column: 2;
+    }
+
+
+    .timeline-content h3 {
+      font-size: 32px;
+    }
+
+
+    .timeline-content p {
+      font-size: 16px;
+
+      line-height: 1.58;
+    }
+
+
+    .background-next {
+      padding:
+        46px
+        0;
+    }
+
+
+    .background-next h2 {
+      font-size: 39px;
+    }
+
+  }
+
+</style>

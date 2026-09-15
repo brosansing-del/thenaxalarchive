@@ -5,170 +5,110 @@ import Footer from '../../components/Footer.astro';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '');
 
-const phases = [
+const sections = [
   {
-    id: 'naxalbari',
     number: '01',
-    year: '1967',
-    title: 'Naxalbari',
-    text: `A peasant uprising in a village in West Bengal's Darjeeling district gives the movement its name. The episode becomes the symbolic starting point of the Naxalite movement and marks a break by revolutionary communist cadres from the parliamentary communist mainstream.`,
+    title: 'History',
+    description:
+      'Trace the movement from the 1967 Naxalbari uprising through organisational expansion, the formation of CPI (Maoist), and its subsequent contraction.',
+    href: `${BASE}/background/history/`,
+    label: 'Explore history',
   },
   {
-    id: 'cpi-ml',
     number: '02',
-    year: '1969–72',
-    title: 'CPI(ML) and early fragmentation',
-    text: `The Communist Party of India (Marxist-Leninist) emerges around an armed revolutionary strategy. State suppression, leadership losses and internal divisions fragment the organisation within a few years.`,
+    title: 'Ideology',
+    description:
+      'Examine the ideological foundations, political objectives, strategic doctrines and organisational principles associated with the movement.',
+    href: `${BASE}/background/ideology/`,
+    label: 'Explore ideology',
   },
   {
-    id: 'pwg-mcc',
     number: '03',
-    year: '1980s',
-    title: 'PWG and MCC consolidation',
-    text: `The People's War Group develops a strong organisational base in Andhra Pradesh, while the Maoist Communist Centre operates separately from Bihar and later Jharkhand. The movement's centre of gravity increasingly shifts toward the forested and tribal belts of central and eastern India.`,
-  },
-  {
-    id: 'convergence',
-    number: '04',
-    year: '1990s–2004',
-    title: 'Expansion and convergence',
-    text: `Separate Maoist formations expand across several parts of central and eastern India. Organisational consolidation, movement across adjoining state borders and the growth of forest-based operating areas gradually bring the principal formations closer together.`,
-  },
-  {
-    id: 'cpi-maoist',
-    number: '05',
-    year: '2004–2010',
-    title: 'CPI (Maoist) and wider expansion',
-    text: `The merger of the People's War Group and the Maoist Communist Centre creates the Communist Party of India (Maoist). The new organisation consolidates leadership and armed structures across a wider geographical belt.`,
-  },
-  {
-    id: 'contraction',
-    number: '06',
-    year: '2011–Present',
-    title: 'Contraction and transformation',
-    text: `Sustained security pressure, leadership losses, surrenders, infrastructure expansion and deeper administrative access reshape the movement's geography and operating space. The conflict increasingly becomes concentrated in a smaller number of areas.`,
+    title: 'Major Incidents',
+    description:
+      'Review major attacks, security operations and other events that shaped the trajectory and geographical spread of Left Wing Extremism.',
+    href: `${BASE}/background/major-incidents/`,
+    label: 'Explore incidents',
   },
 ];
 ---
 
 <BaseLayout
-  title="Background — History of the Naxalite Movement"
-  description="A phase-wise history of the Naxalite movement in India from Naxalbari in 1967 to its later contraction and transformation."
+  title="Background — The Naxal Archive"
+  description="Historical, ideological and incident-based background on the Naxalite movement and Left Wing Extremism in India."
 >
   <Header />
 
   <main class="background-page" id="top">
 
-    <!-- HERO -->
     <section class="background-hero">
-      <div class="shell hero-inner">
+      <div class="shell">
 
-        <div class="hero-copy">
-          <span class="eyebrow">Background · History</span>
+        <span class="eyebrow">
+          The Naxal Archive
+        </span>
 
-          <h1>
-            History of the
-            Naxalite movement.
-          </h1>
+        <h1>
+          Background
+        </h1>
 
-          <p>
-            Five decades, in phases. Each phase marks a shift in leadership,
-            geography or method — not a clean break.
-          </p>
-        </div>
-
-        <aside class="hero-index">
-          <span>Historical record</span>
-          <strong>1967 → Present</strong>
-          <p>
-            Scroll through the phases or select a period below.
-          </p>
-        </aside>
+        <p>
+          Understand the movement through its historical evolution,
+          ideological foundations and major incidents.
+        </p>
 
       </div>
     </section>
 
 
-    <!-- QUICK PHASE NAV -->
-    <section class="phase-nav-section">
+    <section class="background-sections">
       <div class="shell">
 
-        <div class="phase-nav">
-
-          {phases.map((phase) => (
-            <a href={`#${phase.id}`}>
-              <span>{phase.year}</span>
-              <strong>{phase.title}</strong>
-            </a>
-          ))}
-
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- HISTORY RECORD -->
-    <section class="history-record">
-      <div class="shell">
-
-        <div class="record-intro">
+        <div class="section-heading">
 
           <div>
-            <span class="eyebrow">Historical record</span>
+            <span class="eyebrow">
+              Explore the record
+            </span>
+
             <h2>
-              The movement through six phases
+              Three ways to understand the movement
             </h2>
           </div>
 
           <p>
-            The periods below are analytical markers rather than rigid
-            boundaries. Organisations, leaders and regional networks often
-            overlap across phases.
+            These sections provide the essential context for reading the
+            archive's articles, datasets and visual records.
           </p>
 
         </div>
 
 
-        <div class="timeline">
+        <div class="background-grid">
 
-          {phases.map((phase) => (
+          {sections.map((section) => (
 
-            <article
-              class="timeline-entry"
-              id={phase.id}
+            <a
+              class="background-card"
+              href={section.href}
             >
-
-              <div class="timeline-marker">
-                <span>{phase.number}</span>
-                <i></i>
+              <div class="card-top">
+                <span>{section.number}</span>
+                <span>Background</span>
               </div>
 
+              <h3>
+                {section.title}
+              </h3>
 
-              <div class="timeline-date">
-                {phase.year}
-              </div>
+              <p>
+                {section.description}
+              </p>
 
-
-              <div class="timeline-content">
-
-                <h3>
-                  {phase.title}
-                </h3>
-
-                <p>
-                  {phase.text}
-                </p>
-
-                <div class="timeline-actions">
-                  <a href="#top">
-                    Back to top ↑
-                  </a>
-                </div>
-
-              </div>
-
-            </article>
+              <strong>
+                {section.label} →
+              </strong>
+            </a>
 
           ))}
 
@@ -178,33 +118,18 @@ const phases = [
     </section>
 
 
-    <!-- NEXT SECTION -->
-    <section class="background-next">
-      <div class="shell next-grid">
+    <section class="background-note">
+      <div class="shell note-grid">
 
-        <div>
-          <span class="eyebrow">
-            Continue exploring
-          </span>
+        <span class="eyebrow">
+          Reading note
+        </span>
 
-          <h2>
-            From historical evolution to structured data.
-          </h2>
-        </div>
-
-        <div class="next-links">
-
-          <a href={`${BASE}/data-visuals/`}>
-            <span>Data & Visuals</span>
-            <strong>Explore datasets →</strong>
-          </a>
-
-          <a href={`${BASE}/articles/`}>
-            <span>Articles</span>
-            <strong>Read analysis →</strong>
-          </a>
-
-        </div>
+        <p>
+          Historical phases are analytical markers rather than rigid
+          boundaries. Organisations, leaders, ideologies and regional
+          networks frequently overlap across periods.
+        </p>
 
       </div>
     </section>
@@ -217,42 +142,17 @@ const phases = [
 
 <style>
 
-  html {
-    scroll-behavior: smooth;
-  }
-
-
   .background-page {
     background: #f3efe5;
     color: #111b20;
   }
 
 
-  .background-page .shell {
-    max-width: 1180px;
-  }
-
-
-  /* HERO */
-
   .background-hero {
-    padding: 72px 0 64px;
+    padding: 76px 0 70px;
 
     border-bottom:
       1px solid #cec6b8;
-  }
-
-
-  .hero-inner {
-    display: grid;
-
-    grid-template-columns:
-      minmax(0, 1.45fr)
-      minmax(250px, .55fr);
-
-    gap: 80px;
-
-    align-items: end;
   }
 
 
@@ -261,24 +161,18 @@ const phases = [
       system-ui,
       sans-serif;
 
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 800;
 
     text-transform: uppercase;
-
     letter-spacing: .12em;
 
     color: #a34f32;
   }
 
 
-  .hero-copy h1 {
-    max-width: 800px;
-
-    margin:
-      12px
-      0
-      24px;
+  .background-hero h1 {
+    margin: 14px 0 22px;
 
     font-family:
       Georgia,
@@ -286,22 +180,17 @@ const phases = [
       serif;
 
     font-size:
-      clamp(
-        56px,
-        7vw,
-        94px
-      );
+      clamp(64px, 10vw, 132px);
 
     font-weight: 700;
+    line-height: .86;
 
-    line-height: .92;
-
-    letter-spacing: -.045em;
+    letter-spacing: -.055em;
   }
 
 
-  .hero-copy > p {
-    max-width: 660px;
+  .background-hero p {
+    max-width: 720px;
 
     margin: 0;
 
@@ -310,207 +199,37 @@ const phases = [
       "Times New Roman",
       serif;
 
-    font-size: 20px;
-
+    font-size: 21px;
     line-height: 1.55;
 
-    color: #62615c;
+    color: #625f59;
   }
 
 
-  .hero-index {
-    border-left:
-      3px solid #a65b3f;
-
-    padding:
-      8px
-      0
-      8px
-      24px;
+  .background-sections {
+    padding: 70px 0 84px;
   }
 
 
-  .hero-index > span {
-    display: block;
-
-    margin-bottom: 10px;
-
-    font-family:
-      system-ui,
-      sans-serif;
-
-    font-size: 10px;
-    font-weight: 800;
-
-    letter-spacing: .12em;
-
-    text-transform: uppercase;
-
-    color: #8f877c;
-  }
-
-
-  .hero-index strong {
-    display: block;
-
-    font-family:
-      Georgia,
-      "Times New Roman",
-      serif;
-
-    font-size: 27px;
-
-    line-height: 1.1;
-  }
-
-
-  .hero-index p {
-    max-width: 230px;
-
-    margin:
-      14px
-      0
-      0;
-
-    font-family:
-      Georgia,
-      "Times New Roman",
-      serif;
-
-    font-size: 14px;
-
-    line-height: 1.5;
-
-    color: #69655f;
-  }
-
-
-  /* QUICK NAV */
-
-  .phase-nav-section {
-    padding:
-      22px
-      0;
-
-    background: #ebe5d9;
-
-    border-bottom:
-      1px solid #cec6b8;
-  }
-
-
-  .phase-nav {
+  .section-heading {
     display: grid;
 
     grid-template-columns:
-      repeat(
-        6,
-        minmax(0, 1fr)
-      );
-  }
-
-
-  .phase-nav a {
-    min-width: 0;
-
-    padding:
-      10px
-      15px;
-
-    border-right:
-      1px solid #cec6b8;
-
-    color: #111b20;
-
-    text-decoration: none;
-  }
-
-
-  .phase-nav a:first-child {
-    border-left:
-      1px solid #cec6b8;
-  }
-
-
-  .phase-nav span {
-    display: block;
-
-    margin-bottom: 6px;
-
-    font-family:
-      system-ui,
-      sans-serif;
-
-    font-size: 9px;
-    font-weight: 800;
-
-    letter-spacing: .1em;
-
-    text-transform: uppercase;
-
-    color: #9b4d34;
-  }
-
-
-  .phase-nav strong {
-    display: block;
-
-    font-family:
-      Georgia,
-      "Times New Roman",
-      serif;
-
-    font-size: 13px;
-
-    line-height: 1.25;
-  }
-
-
-  @media
-  (hover: hover)
-  and
-  (pointer: fine) {
-
-    .phase-nav a:hover {
-      background: #172327;
-      color: #fffdf8;
-    }
-
-  }
-
-
-  /* RECORD INTRO */
-
-  .history-record {
-    padding:
-      72px
-      0
-      84px;
-  }
-
-
-  .record-intro {
-    display: grid;
-
-    grid-template-columns:
-      1.1fr
-      .9fr;
+      minmax(0, 1.1fr)
+      minmax(280px, .9fr);
 
     gap: 70px;
 
     align-items: end;
 
-    margin-bottom: 64px;
+    margin-bottom: 46px;
   }
 
 
-  .record-intro h2 {
+  .section-heading h2 {
     max-width: 650px;
 
-    margin:
-      8px
-      0
-      0;
+    margin: 10px 0 0;
 
     font-family:
       Georgia,
@@ -518,171 +237,15 @@ const phases = [
       serif;
 
     font-size:
-      clamp(
-        38px,
-        5vw,
-        58px
-      );
+      clamp(40px, 5vw, 62px);
 
     line-height: .98;
-
     letter-spacing: -.035em;
   }
 
 
-  .record-intro > p {
-    max-width: 510px;
-
-    margin: 0;
-
-    font-family:
-      Georgia,
-      "Times New Roman",
-      serif;
-
-    font-size: 16px;
-
-    line-height: 1.6;
-
-    color: #68645e;
-  }
-
-
-  /* TIMELINE */
-
-  .timeline {
-    border-top:
-      1px solid #c9c0b3;
-  }
-
-
-  .timeline-entry {
-    scroll-margin-top: 110px;
-
-    display: grid;
-
-    grid-template-columns:
-      72px
-      170px
-      minmax(0, 1fr);
-
-    gap: 28px;
-
-    min-height: 310px;
-
-    padding:
-      44px
-      0;
-
-    border-bottom:
-      1px solid #c9c0b3;
-  }
-
-
-  .timeline-marker {
-    position: relative;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-  }
-
-
-  .timeline-marker span {
-    position: relative;
-
-    z-index: 2;
-
-    width: 42px;
-    height: 42px;
-
-    display: grid;
-
-    place-items: center;
-
-    border-radius: 50%;
-
-    background: #172327;
-
-    color: #fffdf8;
-
-    font-family:
-      system-ui,
-      sans-serif;
-
-    font-size: 10px;
-
-    font-weight: 800;
-  }
-
-
-  .timeline-marker i {
-    position: absolute;
-
-    top: 42px;
-    bottom: -44px;
-
-    width: 1px;
-
-    background: #bdb4a6;
-  }
-
-
-  .timeline-entry:last-child
-  .timeline-marker i {
-    display: none;
-  }
-
-
-  .timeline-date {
-    padding-top: 6px;
-
-    font-family:
-      Georgia,
-      "Times New Roman",
-      serif;
-
-    font-size: 26px;
-
-    font-weight: 700;
-
-    color: #9c4f37;
-  }
-
-
-  .timeline-content {
-    max-width: 700px;
-  }
-
-
-  .timeline-content h3 {
-    margin:
-      0
-      0
-      18px;
-
-    font-family:
-      Georgia,
-      "Times New Roman",
-      serif;
-
-    font-size:
-      clamp(
-        34px,
-        4vw,
-        49px
-      );
-
-    line-height: 1;
-
-    letter-spacing: -.03em;
-  }
-
-
-  .timeline-content p {
-    max-width: 660px;
+  .section-heading > p {
+    max-width: 500px;
 
     margin: 0;
 
@@ -692,334 +255,239 @@ const phases = [
       serif;
 
     font-size: 17px;
+    line-height: 1.6;
 
-    line-height: 1.65;
-
-    color: #61615c;
+    color: #68645e;
   }
 
 
-  .timeline-actions {
-    margin-top: 28px;
+  .background-grid {
+    display: grid;
+
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    border-top:
+      1px solid #c9c0b3;
+
+    border-left:
+      1px solid #c9c0b3;
   }
 
 
-  .timeline-actions a {
+  .background-card {
+    min-width: 0;
+    min-height: 410px;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 30px;
+
+    border-right:
+      1px solid #c9c0b3;
+
+    border-bottom:
+      1px solid #c9c0b3;
+
+    background: #fffdf8;
+
+    color: #111b20;
+    text-decoration: none;
+
+    transition:
+      background .2s ease,
+      color .2s ease;
+  }
+
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 70px;
+
     font-family:
       system-ui,
       sans-serif;
 
     font-size: 10px;
-
     font-weight: 800;
 
-    letter-spacing: .06em;
-
     text-transform: uppercase;
+    letter-spacing: .1em;
 
-    color: #111b20;
-
-    text-decoration: none;
+    color: #9c5a40;
   }
 
 
-  /* NEXT */
-
-  .background-next {
-    padding:
-      60px
-      0;
-
-    background: #172327;
-
-    color: #fffdf8;
-  }
-
-
-  .next-grid {
-    display: grid;
-
-    grid-template-columns:
-      1.2fr
-      .8fr;
-
-    gap: 70px;
-
-    align-items: end;
-  }
-
-
-  .background-next .eyebrow {
-    color: #d19775;
-  }
-
-
-  .background-next h2 {
-    max-width: 680px;
-
-    margin:
-      10px
-      0
-      0;
+  .background-card h3 {
+    margin: 0 0 18px;
 
     font-family:
       Georgia,
       "Times New Roman",
       serif;
 
-    font-size:
-      clamp(
-        36px,
-        4.5vw,
-        56px
-      );
-
+    font-size: 38px;
     line-height: 1;
 
-    letter-spacing: -.035em;
+    letter-spacing: -.03em;
   }
 
 
-  .next-links {
-    display: grid;
+  .background-card p {
+    margin: 0 0 32px;
 
-    gap: 10px;
-  }
-
-
-  .next-links a {
-    display: flex;
-
-    justify-content: space-between;
-
-    gap: 20px;
-
-    padding:
-      18px
-      0;
-
-    border-bottom:
-      1px solid #4d5a5d;
-
-    color: #fffdf8;
-
-    text-decoration: none;
-  }
-
-
-  .next-links span {
-    font-family:
-      system-ui,
-      sans-serif;
-
-    font-size: 10px;
-
-    font-weight: 700;
-
-    text-transform: uppercase;
-
-    letter-spacing: .1em;
-
-    color: #aeb8b8;
-  }
-
-
-  .next-links strong {
     font-family:
       Georgia,
       "Times New Roman",
       serif;
 
     font-size: 16px;
+    line-height: 1.6;
+
+    color: #68645e;
   }
 
 
-  /* TABLET */
+  .background-card strong {
+    margin-top: auto;
+
+    font-family:
+      system-ui,
+      sans-serif;
+
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+
+  @media
+  (hover: hover)
+  and
+  (pointer: fine) {
+
+    .background-card:hover {
+      background: #172327;
+      color: #fffdf8;
+    }
+
+
+    .background-card:hover p {
+      color: #d2d7d5;
+    }
+
+
+    .background-card:hover .card-top {
+      color: #d79a77;
+    }
+
+  }
+
+
+  .background-note {
+    padding: 42px 0;
+
+    background: #e8e1d4;
+
+    border-top:
+      1px solid #c9c0b3;
+  }
+
+
+  .note-grid {
+    display: grid;
+
+    grid-template-columns:
+      190px
+      minmax(0, 680px);
+
+    gap: 40px;
+  }
+
+
+  .note-grid p {
+    margin: 0;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size: 17px;
+    line-height: 1.6;
+
+    color: #55534e;
+  }
+
 
   @media (max-width: 900px) {
 
-    .hero-inner {
+    .section-heading {
       grid-template-columns: 1fr;
-
-      gap: 38px;
-    }
-
-
-    .hero-index {
-      max-width: 460px;
-    }
-
-
-    .phase-nav {
-      grid-template-columns:
-        repeat(
-          3,
-          1fr
-        );
-
-      gap: 1px;
-
-      background: #cec6b8;
-    }
-
-
-    .phase-nav a {
-      background: #ebe5d9;
-
-      border: 0;
-    }
-
-
-    .record-intro {
-      grid-template-columns: 1fr;
-
       gap: 24px;
     }
 
 
-    .timeline-entry {
-      grid-template-columns:
-        58px
-        130px
-        minmax(0, 1fr);
+    .background-grid {
+      grid-template-columns: 1fr;
     }
 
 
-    .next-grid {
-      grid-template-columns: 1fr;
+    .background-card {
+      min-height: 320px;
+    }
 
-      gap: 34px;
+
+    .card-top {
+      margin-bottom: 42px;
     }
 
   }
 
 
-  /* IPHONE */
-
   @media (max-width: 600px) {
 
     .background-hero {
-      padding:
-        42px
-        0
-        40px;
+      padding: 46px 0 44px;
     }
 
 
-    .hero-copy h1 {
-      font-size: 48px;
-
-      line-height: .95;
+    .background-hero h1 {
+      font-size: 64px;
     }
 
 
-    .hero-copy > p {
-      font-size: 17px;
+    .background-hero p {
+      font-size: 18px;
     }
 
 
-    .phase-nav {
-      grid-template-columns:
-        repeat(
-          2,
-          1fr
-        );
+    .background-sections {
+      padding: 48px 0 58px;
     }
 
 
-    .phase-nav a {
-      min-height: 84px;
-
-      padding: 13px;
-    }
-
-
-    .history-record {
-      padding:
-        48px
-        0
-        60px;
-    }
-
-
-    .record-intro {
-      margin-bottom: 42px;
-    }
-
-
-    .record-intro h2 {
+    .section-heading h2 {
       font-size: 40px;
     }
 
 
-    .timeline-entry {
-      grid-template-columns:
-        46px
-        minmax(0, 1fr);
-
-      gap:
-        10px
-        16px;
-
-      min-height: 0;
-
-      padding:
-        34px
-        0;
+    .background-card {
+      min-height: 300px;
+      padding: 25px;
     }
 
 
-    .timeline-marker {
-      grid-row:
-        1 / span 2;
+    .background-card h3 {
+      font-size: 34px;
     }
 
 
-    .timeline-marker span {
-      width: 36px;
-      height: 36px;
-    }
-
-
-    .timeline-marker i {
-      top: 36px;
-      bottom: -34px;
-    }
-
-
-    .timeline-date {
-      grid-column: 2;
-
-      font-size: 19px;
-    }
-
-
-    .timeline-content {
-      grid-column: 2;
-    }
-
-
-    .timeline-content h3 {
-      font-size: 32px;
-    }
-
-
-    .timeline-content p {
-      font-size: 16px;
-
-      line-height: 1.58;
-    }
-
-
-    .background-next {
-      padding:
-        46px
-        0;
-    }
-
-
-    .background-next h2 {
-      font-size: 39px;
+    .note-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
     }
 
   }

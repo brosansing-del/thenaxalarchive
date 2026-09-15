@@ -1,0 +1,209 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+
+interface Section {
+  id: string;
+  number: string;
+  title: string;
+  summary: string;
+  paragraphs: string[];
+  points?: string[];
+}
+
+interface RelatedLink {
+  label: string;
+  title: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  pageTitle: string;
+  description: string;
+  eyebrow: string;
+  dek: string;
+  documentTitle: string;
+  documentDate: string;
+  documentType: string;
+  editorialNote: string;
+  sections: Section[];
+  relatedLinks: RelatedLink[];
+}
+
+const {
+  title,
+  pageTitle,
+  description,
+  eyebrow,
+  dek,
+  documentTitle,
+  documentDate,
+  documentType,
+  editorialNote,
+  sections,
+  relatedLinks,
+} = Astro.props;
+
+const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '');
+---
+
+<BaseLayout title={pageTitle} description={description}>
+  <Header />
+
+  <main class="document-page" id="top">
+    <section class="document-hero">
+      <div class="shell hero-grid">
+        <div>
+          <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <a href={`${BASE}/background/`}>Background</a>
+            <span>/</span>
+            <a href={`${BASE}/background/ideology/`}>Ideology</a>
+            <span>/</span>
+            <span>{title}</span>
+          </nav>
+
+          <span class="eyebrow">{eyebrow}</span>
+          <h1>{title}</h1>
+          <p class="dek">{dek}</p>
+        </div>
+
+        <aside class="document-profile">
+          <span>Document profile</span>
+          <dl>
+            <div><dt>Source</dt><dd>{documentTitle}</dd></div>
+            <div><dt>Period</dt><dd>{documentDate}</dd></div>
+            <div><dt>Type</dt><dd>{documentType}</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section class="editorial-note">
+      <div class="shell note-grid">
+        <strong>Editorial treatment</strong>
+        <p>{editorialNote}</p>
+      </div>
+    </section>
+
+    <nav class="jump-nav" aria-label="Sections on this page">
+      <div class="shell jump-inner">
+        <span>On this page</span>
+        {sections.map((section) => (
+          <a href={`#${section.id}`}>{section.number} {section.title}</a>
+        ))}
+      </div>
+    </nav>
+
+    <section class="document-content">
+      <div class="shell content-grid">
+        <aside class="content-index">
+          <span class="eyebrow">Document guide</span>
+          <h2>Key ideas and organisational meaning</h2>
+          <p>Select a heading to expand the explanation.</p>
+        </aside>
+
+        <div class="section-list">
+          {sections.map((section, index) => (
+            <details class="section-item" id={section.id} open={index === 0}>
+              <summary>
+                <span class="number">{section.number}</span>
+                <span class="heading">
+                  <strong>{section.title}</strong>
+                  <small>{section.summary}</small>
+                </span>
+                <span class="toggle" aria-hidden="true"></span>
+              </summary>
+
+              <div class="section-body">
+                {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+
+                {section.points && (
+                  <ul>
+                    {section.points.map((point) => <li>{point}</li>)}
+                  </ul>
+                )}
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="related-section">
+      <div class="shell">
+        <span class="eyebrow">Continue reading</span>
+        <div class="related-grid">
+          {relatedLinks.map((link) => (
+            <a href={`${BASE}${link.href}`}>
+              <span>{link.label}</span>
+              <strong>{link.title} →</strong>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  html { scroll-behavior: smooth; }
+  .document-page { --ink:#111b20; --paper:#f3efe5; --light:#fffdf8; --line:#cec6b8; --rust:#a34f32; --dark:#172327; background:var(--paper); color:var(--ink); }
+  .eyebrow { font:800 11px/1.2 system-ui,sans-serif; text-transform:uppercase; letter-spacing:.12em; color:var(--rust); }
+  .document-hero { padding:68px 0 62px; border-bottom:1px solid var(--line); }
+  .hero-grid { display:grid; grid-template-columns:minmax(0,1.4fr) minmax(270px,.6fr); gap:72px; align-items:end; }
+  .breadcrumbs { display:flex; flex-wrap:wrap; gap:9px; margin-bottom:52px; font:700 12px/1.3 system-ui,sans-serif; color:#7b756c; }
+  .breadcrumbs a { color:inherit; text-decoration:none; }
+  .breadcrumbs a:hover { color:var(--rust); }
+  h1 { max-width:900px; margin:13px 0 24px; font:700 clamp(50px,7vw,88px)/.94 Georgia,serif; letter-spacing:-.047em; }
+  .dek { max-width:760px; margin:0; font:400 19px/1.58 Georgia,serif; color:#5f5d57; }
+  .document-profile { padding:25px; border-top:3px solid var(--rust); background:#e9e2d6; }
+  .document-profile > span { display:block; margin-bottom:24px; font:800 10px/1 system-ui,sans-serif; text-transform:uppercase; letter-spacing:.12em; color:var(--rust); }
+  .document-profile dl { margin:0; }
+  .document-profile dl div { padding:12px 0; border-top:1px solid var(--line); }
+  .document-profile dt { margin-bottom:5px; font:800 9px/1 system-ui,sans-serif; text-transform:uppercase; letter-spacing:.1em; color:#827b71; }
+  .document-profile dd { margin:0; font:700 15px/1.35 Georgia,serif; }
+  .editorial-note { padding:28px 0; background:var(--dark); color:#fffdf8; }
+  .note-grid { display:grid; grid-template-columns:190px minmax(0,760px); gap:42px; }
+  .note-grid strong { font:800 10px/1.3 system-ui,sans-serif; text-transform:uppercase; letter-spacing:.1em; color:#d69b78; }
+  .note-grid p { margin:0; font:400 15px/1.6 Georgia,serif; color:#d2d7d5; }
+  .jump-nav { position:sticky; top:0; z-index:15; border-bottom:1px solid var(--line); background:rgba(235,229,217,.96); backdrop-filter:blur(10px); }
+  .jump-inner { display:flex; gap:25px; align-items:center; min-height:58px; overflow-x:auto; scrollbar-width:none; }
+  .jump-inner::-webkit-scrollbar { display:none; }
+  .jump-inner span,.jump-inner a { flex:0 0 auto; font:800 11px/1 system-ui,sans-serif; }
+  .jump-inner span { padding-right:25px; border-right:1px solid var(--line); text-transform:uppercase; letter-spacing:.1em; color:var(--rust); }
+  .jump-inner a { color:var(--ink); text-decoration:none; }
+  .jump-inner a:hover { color:var(--rust); }
+  .document-content { padding:86px 0 96px; }
+  .content-grid { display:grid; grid-template-columns:minmax(250px,.65fr) minmax(0,1.35fr); gap:82px; align-items:start; }
+  .content-index { position:sticky; top:90px; }
+  .content-index h2 { max-width:380px; margin:10px 0 18px; font:700 clamp(35px,4vw,52px)/1 Georgia,serif; letter-spacing:-.035em; }
+  .content-index p { margin:0; font:400 15px/1.6 Georgia,serif; color:#6b675f; }
+  .section-item { scroll-margin-top:90px; border-top:1px solid var(--line); }
+  .section-item:last-child { border-bottom:1px solid var(--line); }
+  .section-item summary { display:grid; grid-template-columns:42px 1fr 28px; gap:17px; align-items:center; padding:25px 0; cursor:pointer; list-style:none; }
+  .section-item summary::-webkit-details-marker { display:none; }
+  .number { font:800 10px/1 system-ui,sans-serif; color:var(--rust); }
+  .heading strong { display:block; font:700 27px/1.08 Georgia,serif; }
+  .heading small { display:block; margin-top:7px; font:700 11px/1.3 system-ui,sans-serif; text-transform:uppercase; letter-spacing:.075em; color:#817a70; }
+  .toggle { position:relative; width:24px; height:24px; }
+  .toggle::before,.toggle::after { content:''; position:absolute; top:11px; left:5px; width:14px; height:2px; background:var(--ink); }
+  .toggle::after { transform:rotate(90deg); transition:transform .2s ease; }
+  .section-item[open] .toggle::after { transform:rotate(0); }
+  .section-body { padding:0 45px 30px 59px; }
+  .section-body p { max-width:720px; margin:0 0 17px; font:400 17px/1.7 Georgia,serif; color:#56534e; }
+  .section-body ul { max-width:720px; margin:22px 0 4px; padding-left:19px; }
+  .section-body li { margin:0 0 12px; padding-left:7px; font:400 16px/1.55 Georgia,serif; color:#56534e; }
+  .related-section { padding:68px 0 76px; border-top:1px solid var(--line); background:#e9e2d6; }
+  .related-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); margin-top:24px; border-top:1px solid #bdb3a5; border-left:1px solid #bdb3a5; }
+  .related-grid a { min-height:145px; display:flex; flex-direction:column; justify-content:space-between; padding:24px; border-right:1px solid #bdb3a5; border-bottom:1px solid #bdb3a5; color:var(--ink); text-decoration:none; }
+  .related-grid span { font:800 10px/1 system-ui,sans-serif; text-transform:uppercase; letter-spacing:.1em; color:var(--rust); }
+  .related-grid strong { font:700 22px/1.15 Georgia,serif; }
+  .related-grid a:hover { background:var(--dark); color:#fffdf8; }
+  @media(max-width:900px){.hero-grid,.content-grid{grid-template-columns:1fr;gap:40px}.document-profile{max-width:520px}.content-index{position:static}.related-grid{grid-template-columns:1fr}}
+  @media(max-width:600px){.document-hero{padding:42px 0 40px}.breadcrumbs{margin-bottom:35px}h1{font-size:47px}.dek{font-size:17px}.note-grid{grid-template-columns:1fr;gap:12px}.jump-inner span{display:none}.document-content{padding:54px 0 62px}.section-item summary{grid-template-columns:32px 1fr 24px;gap:11px}.heading strong{font-size:22px}.section-body{padding:0 0 27px 43px}.related-section{padding:50px 0}}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.toggle::after{transition:none}}
+</style>

@@ -1,0 +1,46 @@
+---
+import DoctrinePage from '../../../../components/DoctrinePage.astro';
+
+const sections = [
+  { id:'diagnosis', number:'01', title:'The programme’s diagnosis of India', summary:'Its starting political claim', paragraphs:[
+    'The programme characterises India as “semi-colonial and semi-feudal”. It argues that formal independence did not remove imperial influence, concentrated land ownership or the power of what it calls the comprador bureaucratic bourgeoisie.',
+    'This classification is the party’s ideological premise. It is contested and should be understood as the argument from which the rest of the programme follows, not as a neutral description of present-day India.'
+  ]},
+  { id:'contradictions', number:'02', title:'Four stated contradictions', summary:'How the programme orders conflict', paragraphs:[
+    'The document identifies four major contradictions and treats the first two as basic to the proposed New Democratic Revolution. It calls the conflict between feudalism and the broad masses the principal contradiction at that stage.'
+  ], points:['Imperialism and the Indian people','Feudalism and the broad masses','Capital and labour','Contradictions among the ruling classes']},
+  { id:'social-questions', number:'03', title:'Caste, gender, nationality and Adivasi questions', summary:'Social oppression within a class framework', paragraphs:[
+    'The programme discusses caste discrimination, patriarchy, religious communalism, nationalities and Adivasi dispossession as distinct forms of oppression. It nevertheless places each within its wider class analysis and proposed revolutionary strategy.',
+    'It calls for opposition to untouchability and caste discrimination, equal rights for women, protection of minority communities, and political attention to Adivasi land, livelihood, culture and autonomy. These commitments sit alongside its rejection of constitutional institutions and advocacy of armed revolution.'
+  ]},
+  { id:'strategy', number:'04', title:'Protracted People’s War', summary:'The proposed means of transformation', paragraphs:[
+    'Because the programme sees India as predominantly agrarian and unevenly developed, it proposes a rural revolutionary strategy. It envisages organising in the countryside, developing base areas and attempting to encircle and capture urban centres over time.',
+    'Urban struggles are assigned an important but supporting role. The peasantry is described as the main force, with the working class providing political leadership.'
+  ]},
+  { id:'stages', number:'05', title:'Two-stage revolution', summary:'New democracy followed by socialism', paragraphs:[
+    'The first proposed stage is a New Democratic Revolution directed against imperialism, feudalism and comprador bureaucratic capitalism. The programme imagines a new state based on an alliance of workers, peasants, the petty bourgeoisie and sections of the national bourgeoisie under proletarian leadership.',
+    'The second stage is a transition toward socialism and ultimately communism. The document therefore treats the democratic stage as a prerequisite rather than the final objective.'
+  ]},
+  { id:'assessment', number:'06', title:'How to read the programme today', summary:'Historical source and political project', paragraphs:[
+    'The text is valuable as a primary source for understanding how CPI (Maoist) interprets Indian society and justifies its strategy. It also reflects the political vocabulary, economic assumptions and international communist debates of the period in which it was drafted.',
+    'A critical reading should compare its stated social objectives with the organisation’s methods, the effects of violence on civilians and public infrastructure, and changes in Indian society since the programme was written.'
+  ]},
+];
+---
+
+<DoctrinePage
+  title="CPI (Maoist)’s Political Programme for India"
+  pageTitle="CPI Maoist Political Programme for India — The Naxal Archive"
+  description="An analytical summary of the CPI Maoist Party Programme, including its diagnosis of India, major contradictions, social questions and proposed revolutionary stages."
+  eyebrow="Foundational text · Political programme"
+  dek="How the organisation interprets Indian society, identifies the groups it seeks to mobilise and describes its proposed path from armed revolution to a new political order."
+  documentTitle="CPI (Maoist) Party Programme"
+  documentDate="Adopted during the 2004 merger period; supplied copy saved in 2007"
+  documentType="Political programme"
+  editorialNote="This is a structured explanation of a banned organisation’s primary document. Contested descriptions and political claims are attributed to the programme, while the archive’s explanatory text remains neutral."
+  sections={sections}
+  relatedLinks={[
+    {label:'Theoretical foundation',title:'Ideological Foundations',href:'/background/ideology/mlm/'},
+    {label:'Rules and structure',title:'Organisation and Internal Control',href:'/background/ideology/party-constitution/'},
+  ]}
+/>

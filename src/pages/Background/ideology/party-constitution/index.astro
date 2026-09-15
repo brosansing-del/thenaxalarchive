@@ -1,0 +1,51 @@
+---
+import DoctrinePage from '../../../../components/DoctrinePage.astro';
+
+const sections = [
+  { id:'purpose', number:'01', title:'Purpose and declared objective', summary:'What the constitution establishes', paragraphs:[
+    'The constitution names the Communist Party of India (Maoist), identifies Marxism-Leninism-Maoism as its guiding ideology and connects the organisation to the New Democratic Revolution described in the party programme.',
+    'Unlike the programme, which explains the proposed political transformation, the constitution focuses on membership, authority, discipline, decision-making and the relationship between political and armed structures.'
+  ]},
+  { id:'membership', number:'02', title:'Membership and cadre formation', summary:'Admission, candidature and duties', paragraphs:[
+    'The document provides for individual admission through a primary unit following recommendation and internal scrutiny. It distinguishes candidate membership from full membership and sets different probationary periods according to the applicant’s class background.',
+    'Members are expected to accept the ideology, programme and constitution, participate in assigned work, observe discipline, pay fees or levies and subordinate personal interests to party decisions.'
+  ]},
+  { id:'principles', number:'03', title:'Democratic centralism', summary:'Discussion followed by binding implementation', paragraphs:[
+    'The constitution describes democratic centralism as its governing organisational principle. Members and lower bodies may discuss and convey differences through prescribed internal channels, but decisions of the majority and higher committees become binding.',
+    'The same framework combines internal debate, central authority, secrecy and disciplinary enforcement. The text presents criticism and self-criticism as methods for correction and ideological unity.'
+  ]},
+  { id:'structure', number:'04', title:'Organisational hierarchy', summary:'From party congress to primary cell', paragraphs:[
+    'The Party Congress is designated the supreme body. Between congresses, authority rests with the Central Committee, which may constitute a Politburo, Central Military Commission, regional bureaus, commissions and departments.',
+    'Below the central level, the document sets out state or special-area bodies, regional and divisional structures, area committees, local committees and primary cells. A cell is described as the basic unit linking the organisation to local activity.'
+  ], points:['Party Congress','Central Committee and Politburo','Central Military Commission and regional bureaus','State, special-area and regional committees','Zonal, district, divisional and area committees','Local committees and party cells']},
+  { id:'army', number:'05', title:'Party control over the people’s army', summary:'Political authority over armed formations', paragraphs:[
+    'The constitution calls the people’s army the party’s chief instrument and places military affairs under political direction. The Central Committee determines overall strategy, while the Central Military Commission conducts military affairs within that line.',
+    'It also requires party organisation within armed formations. This makes political command, ideological education and military structure parts of a single hierarchy rather than separate institutions.'
+  ]},
+  { id:'discipline', number:'06', title:'Discipline, debate and finance', summary:'Mechanisms of organisational control', paragraphs:[
+    'The document provides graduated disciplinary measures and an internal appeal process, while treating breaches of secrecy, programme or organisational rules as serious violations. Internal disagreement may be raised through controlled channels, with the Central Committee retaining broad authority over circulation.',
+    'It lists membership fees, levies, donations, taxes, penalties and confiscated property among funding sources. This description is reproduced only at a high level to explain the organisation’s constitutional model.'
+  ]},
+  { id:'reading', number:'07', title:'What the constitution reveals', summary:'An analytical reading', paragraphs:[
+    'The constitution portrays a highly centralised clandestine party designed for prolonged conflict. Its hierarchy combines political leadership, mass work and armed command, while its rules seek to maintain cohesion under conditions of illegality and security pressure.',
+    'It is a normative document: it describes how the organisation says it should function. It does not by itself establish how consistently those rules were followed in different regions or periods.'
+  ]},
+];
+---
+
+<DoctrinePage
+  title="How CPI (Maoist) Is Organised and Controlled"
+  pageTitle="How CPI Maoist Is Organised and Controlled — The Naxal Archive"
+  description="A neutral guide to the CPI Maoist Party Constitution, including membership, democratic centralism, hierarchy, discipline and political control over armed formations."
+  eyebrow="Foundational text · Organisation"
+  dek="The organisation’s rules for membership, leadership, internal discipline and political control over its armed structure."
+  documentTitle="CPI (Maoist) Party Constitution"
+  documentDate="Adopted during the 2004 merger period; supplied copy saved in 2007"
+  documentType="Organisational constitution"
+  editorialNote="The constitution is treated as a primary source describing the organisation’s intended design. The page does not assume that formal rules accurately describe practice across every region or period."
+  sections={sections}
+  relatedLinks={[
+    {label:'Guiding doctrine',title:'Ideological Foundations',href:'/background/ideology/mlm/'},
+    {label:'Political objective',title:'Political Programme for India',href:'/background/ideology/party-programme/'},
+  ]}
+/>
