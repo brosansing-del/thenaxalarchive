@@ -7,7 +7,7 @@ section: "News Desk"
 type: "Analysis"
 featured: true
 readTime: "5 min read"
-cover: "/thenaxalarchive/images/articles/seeds-of-trust/cover.png"
+cover: "/images/articles/seeds-of-trust/cover.png"
 ---
 
 For decades, the dense forests of central and eastern India were defined by a singular, grim rhythm: the echo of gunfire and a heavy shroud of fear. Entire districts were categorized not by their rich cultural heritage or untapped potential, but by the clinical, bureaucratic label of being "Naxal-affected." In these zones, progress was often the first casualty of conflict.

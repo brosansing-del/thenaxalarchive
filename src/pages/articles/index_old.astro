@@ -11,10 +11,6 @@ const articles = (await getCollection('articles')).sort(
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const articleUrl = (id: string) => `${BASE}/articles/${id}/`;
-const assetUrl = (path: string) =>
-  /^(https?:)?\/\//.test(path) || path.startsWith('data:')
-    ? path
-    : `${BASE}/${path.replace(/^\/+/, '')}`;
 ---
 
 <BaseLayout
@@ -46,7 +42,7 @@ const assetUrl = (path: string) =>
     {article.data.cover && (
       <div class="article-index-image">
         <img
-          src={assetUrl(article.data.cover)}
+          src={article.data.cover}
           alt={article.data.title}
           loading="lazy"
         />

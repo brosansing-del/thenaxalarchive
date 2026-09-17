@@ -4,10 +4,21 @@ const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '');
 const url = (path = '') =>
   `${BASE}/${path.replace(/^\/+/, '')}`;
 
-const currentPath = Astro.url.pathname.replace(/\/+$/, '');
-const homePath = BASE || '';
-const isHome = currentPath === homePath;
 ---
+
+<div class="language-bar" aria-label="Website language">
+  <div class="shell language-bar-inner">
+    <span class="language-label">Language</span>
+
+    <div class="language-options" role="group" aria-label="Translate website">
+      <button type="button" class="language-option is-active" data-site-language="en">English</button>
+      <button type="button" class="language-option" data-site-language="hi">हिन्दी</button>
+      <button type="button" class="language-option" data-site-language="te">తెలుగు</button>
+    </div>
+
+    <div id="google_translate_element" aria-hidden="true"></div>
+  </div>
+</div>
 
 <header class="site-header">
   <div class="shell header-inner">
@@ -23,14 +34,12 @@ const isHome = currentPath === homePath;
       <div class="nav-dropdown">
         <a class="nav-dropdown-trigger" href={url('background/')}>
           Background
-          {!isHome && <span class="chevron" aria-hidden="true">⌄</span>}
         </a>
 
         <div class="dropdown-menu background-menu">
           <div class="dropdown-label">BACKGROUND</div>
 
           <a href={url('background/history/')}>
-            <span class="dropdown-number">01</span>
             <span>
               <strong>History</strong>
               <small>The movement from Naxalbari to its later contraction</small>
@@ -38,7 +47,6 @@ const isHome = currentPath === homePath;
           </a>
 
           <a href={url('background/ideology/')}>
-            <span class="dropdown-number">02</span>
             <span>
               <strong>Ideology</strong>
               <small>Doctrine, political programme and revolutionary strategy</small>
@@ -46,7 +54,6 @@ const isHome = currentPath === homePath;
           </a>
 
           <a href={url('background/organisation/')}>
-            <span class="dropdown-number">03</span>
             <span>
               <strong>Organisation & Structure</strong>
               <small>Leadership, membership, discipline and armed structures</small>
@@ -54,7 +61,6 @@ const isHome = currentPath === homePath;
           </a>
 
           <a href={url('background/major-incidents/')}>
-            <span class="dropdown-number">04</span>
             <span>
               <strong>Major Incidents</strong>
               <small>Significant attacks, operations and turning points</small>
@@ -62,7 +68,7 @@ const isHome = currentPath === homePath;
           </a>
 
           <div class="dropdown-footer">
-            <a href={url('background/')}>Explore all background →</a>
+            <a href={url('background/')}>Explore all background</a>
           </div>
         </div>
       </div>
@@ -71,14 +77,12 @@ const isHome = currentPath === homePath;
       <div class="nav-dropdown">
         <a class="nav-dropdown-trigger" href={url('data-visuals/')}>
           Data & Visuals
-          {!isHome && <span class="chevron" aria-hidden="true">⌄</span>}
         </a>
 
         <div class="dropdown-menu data-menu">
           <div class="dropdown-label">DATA & VISUALS</div>
 
           <a href={url('data-visuals/senior-leadership-exits/')}>
-            <span class="dropdown-number">01</span>
             <span>
               <strong>Senior CPI (Maoist) Leadership Attrition & Surrenders</strong>
               <small>Searchable PBM and CCM leadership records</small>
@@ -86,7 +90,6 @@ const isHome = currentPath === homePath;
           </a>
 
           <a href={url('data-visuals/infrastructure-targeting/')}>
-            <span class="dropdown-number">02</span>
             <span>
               <strong>Infrastructure Targeting</strong>
               <small>Roads, telecom, rail and other infrastructure</small>
@@ -94,7 +97,6 @@ const isHome = currentPath === homePath;
           </a>
 
           <a href={url('data-visuals/lwe-surrenders/')}>
-            <span class="dropdown-number">03</span>
             <span>
               <strong>LWE Surrenders Since 2004</strong>
               <small>Year-wise and state-wise surrender records</small>
@@ -102,15 +104,21 @@ const isHome = currentPath === homePath;
           </a>
 
           <a href={url('data-visuals/security-force-camps/')}>
-            <span class="dropdown-number">04</span>
             <span>
               <strong>Security Force Camps Since 2013</strong>
               <small>Year-wise and state-wise establishment of SF camps</small>
             </span>
           </a>
 
+          <a href={url('data-visuals/lwe-fatalities-since-1980/')}>
+            <span>
+              <strong>Fatalities in LWE Incidents Since 1980</strong>
+              <small>Year-wise civilian, security-force and extremist deaths</small>
+            </span>
+          </a>
+
           <div class="dropdown-footer">
-            <a href={url('data-visuals/')}>Explore all data →</a>
+            <a href={url('data-visuals/')}>Explore all data</a>
           </div>
         </div>
       </div>
@@ -121,7 +129,202 @@ const isHome = currentPath === homePath;
   </div>
 </header>
 
+<script>
+  type TranslateWindow = Window & {
+    google?: {
+      translate?: {
+        TranslateElement?: new (
+          options: Record<string, unknown>,
+          elementId: string
+        ) => unknown;
+      };
+    };
+    googleTranslateElementInit?: () => void;
+  };
+
+  const translateWindow = window as TranslateWindow;
+  const translationCookie = document.cookie
+    .split('; ')
+    .find((item) => item.startsWith('googtrans='))
+    ?.split('=')[1];
+  const currentLanguage = translationCookie?.split('/').pop() || 'en';
+  const languageButtons = document.querySelectorAll('[data-site-language]');
+
+  const markLanguage = (language: string) => {
+    languageButtons.forEach((button) => {
+      button.classList.toggle(
+        'is-active',
+        button.getAttribute('data-site-language') === language
+      );
+    });
+  };
+
+  markLanguage(currentLanguage);
+
+  const selectTranslatedLanguage = (language: string, attempts = 0) => {
+    const select = document.querySelector('.goog-te-combo');
+
+    if (select instanceof HTMLSelectElement) {
+      select.value = language;
+      select.dispatchEvent(new Event('change'));
+      markLanguage(language);
+      return;
+    }
+
+    if (attempts < 20) {
+      window.setTimeout(() => selectTranslatedLanguage(language, attempts + 1), 150);
+    }
+  };
+
+  const returnToEnglish = () => {
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    window.location.reload();
+  };
+
+  languageButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const language = button.getAttribute('data-site-language');
+      if (!language) return;
+
+      if (language === 'en') returnToEnglish();
+      else selectTranslatedLanguage(language);
+    });
+  });
+
+  translateWindow.googleTranslateElementInit = () => {
+    const TranslateElement = translateWindow.google?.translate?.TranslateElement;
+    if (!TranslateElement) return;
+
+    new TranslateElement(
+      {
+        pageLanguage: 'en',
+        includedLanguages: 'hi,te',
+        autoDisplay: false,
+      },
+      'google_translate_element'
+    );
+  };
+
+  if (!document.querySelector('script[data-site-translator]')) {
+    const translationScript = document.createElement('script');
+    translationScript.src =
+      'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    translationScript.async = true;
+    translationScript.dataset.siteTranslator = 'true';
+    document.head.appendChild(translationScript);
+  }
+
+  const mobileMenu = window.matchMedia('(max-width: 900px)');
+  const dropdowns = document.querySelectorAll('.nav-dropdown');
+
+  dropdowns.forEach((dropdown) => {
+    const trigger = dropdown.querySelector('.nav-dropdown-trigger');
+    if (!(trigger instanceof HTMLAnchorElement)) return;
+
+    trigger.setAttribute('aria-expanded', 'false');
+
+    trigger.addEventListener('click', (event) => {
+      if (!mobileMenu.matches) return;
+
+      event.preventDefault();
+      const willOpen = !dropdown.classList.contains('is-open');
+
+      dropdowns.forEach((item) => {
+        item.classList.remove('is-open');
+        item.querySelector('.nav-dropdown-trigger')?.setAttribute('aria-expanded', 'false');
+      });
+
+      if (willOpen) {
+        dropdown.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!mobileMenu.matches || !(event.target instanceof Node)) return;
+    if ([...dropdowns].some((dropdown) => dropdown.contains(event.target))) return;
+
+    dropdowns.forEach((dropdown) => {
+      dropdown.classList.remove('is-open');
+      dropdown.querySelector('.nav-dropdown-trigger')?.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
 <style>
+  .language-bar {
+    position: relative;
+    z-index: 1001;
+    background: #eee8dc;
+    border-bottom: 1px solid #d8d0c3;
+  }
+
+  .language-bar-inner {
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+  }
+
+  .language-label {
+    font-family: system-ui, sans-serif;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #8a8175;
+  }
+
+  .language-options {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .language-option {
+    position: relative;
+    padding: 11px 0 10px;
+    border: 0;
+    background: transparent;
+    color: #403c37;
+    font-family: system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 650;
+    cursor: pointer;
+  }
+
+  .language-option::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: transparent;
+  }
+
+  .language-option:hover,
+  .language-option.is-active {
+    color: #111b20;
+  }
+
+  .language-option.is-active::after {
+    background: #9c4f37;
+  }
+
+  #google_translate_element,
+  .goog-te-banner-frame,
+  .goog-te-gadget {
+    display: none !important;
+  }
+
+  body {
+    top: 0 !important;
+  }
+
   .site-header {
     position: relative;
     z-index: 1000;
@@ -191,19 +394,7 @@ const isHome = currentPath === homePath;
   }
 
   .nav-dropdown-trigger {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-
-  .chevron {
-    font-size: 13px;
-    transition: transform .2s ease;
-  }
-
-  .nav-dropdown:hover .chevron,
-  .nav-dropdown:focus-within .chevron {
-    transform: rotate(180deg);
+    display: block;
   }
 
   .dropdown-menu {
@@ -244,9 +435,7 @@ const isHome = currentPath === homePath;
   }
 
   .dropdown-menu > a {
-    display: grid;
-    grid-template-columns: 30px 1fr;
-    gap: 10px;
+    display: block;
     padding: 14px 12px;
     border-top: 1px solid #ece5da;
     color: #111b20;
@@ -257,14 +446,6 @@ const isHome = currentPath === homePath;
   .dropdown-menu > a:focus-visible {
     background: #f4efe6;
     outline: none;
-  }
-
-  .dropdown-number {
-    padding-top: 2px;
-    font-family: system-ui, sans-serif;
-    font-size: 10px;
-    font-weight: 800;
-    color: #a05b43;
   }
 
   .dropdown-menu strong {
@@ -302,6 +483,29 @@ const isHome = currentPath === homePath;
   }
 
   @media (max-width: 900px) {
+    .language-bar-inner {
+      min-height: 44px;
+      justify-content: flex-start;
+      overflow-x: auto;
+      gap: 12px;
+    }
+
+    .language-label {
+      display: none;
+    }
+
+    .language-options {
+      min-width: max-content;
+      gap: 19px;
+    }
+
+    .language-option {
+      min-height: 44px;
+      padding-top: 12px;
+      padding-bottom: 11px;
+      font-size: 13px;
+    }
+
     .header-inner {
       min-height: auto;
       padding-top: 18px;
@@ -338,18 +542,26 @@ const isHome = currentPath === homePath;
       display: none !important;
     }
 
-    .chevron {
-      display: none;
+    .nav-dropdown.is-open {
+      width: 100%;
     }
-  }
-/* Remove dropdown numbering and arrows */
-.dropdown-number,
-.chevron {
-  display: none !important;
-}
 
-.dropdown-menu > a {
-  display: block !important;
-  grid-template-columns: 1fr !important;
-}
+    .nav-dropdown.is-open .dropdown-menu {
+      position: static;
+      display: block !important;
+      width: 100%;
+      margin-top: 12px;
+      padding: 10px;
+      transform: none;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      box-shadow: none;
+    }
+
+    .nav-dropdown.is-open .nav-dropdown-trigger {
+      color: #9c4f37;
+    }
+
+  }
 </style>

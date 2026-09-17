@@ -14,11 +14,6 @@ export async function getStaticPaths() {
 
 const { article } = Astro.props;
 const { Content } = await render(article);
-const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '');
-const assetUrl = (path: string) =>
-  /^(https?:)?\/\//.test(path) || path.startsWith('data:')
-    ? path
-    : `${BASE}/${path.replace(/^\/+/, '')}`;
 const formattedDate = article.data.published.toLocaleDateString('en-IN', {
   day: '2-digit', month: 'short', year: 'numeric'
 });
@@ -40,15 +35,6 @@ const formattedDate = article.data.published.toLocaleDateString('en-IN', {
           <div class="article-note"><strong>Editorial note:</strong> {article.data.verificationNote}</div>
         )}
       </header>
-      {article.data.cover && (
-        <figure class="article-cover">
-          <img
-            src={assetUrl(article.data.cover)}
-            alt={article.data.title}
-            loading="eager"
-          />
-        </figure>
-      )}
       <div class="article-body">
         <Content />
       </div>

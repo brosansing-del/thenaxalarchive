@@ -57,7 +57,7 @@ const phases = [
 >
   <Header />
 
-  <main class="background-page" id="top">
+  <main class="background-page">
 
     <!-- HERO -->
     <section class="background-hero">
@@ -161,6 +161,13 @@ const phases = [
                 </p>
 
                 <div class="timeline-actions">
+                  <a
+                    class="phase-read-more"
+                    href={`${BASE}/background/history/${phase.id}/`}
+                  >
+                    Read full phase →
+                  </a>
+
                   <a href="#top">
                     Back to top ↑
                   </a>
@@ -701,6 +708,10 @@ const phases = [
 
   .timeline-actions {
     margin-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 18px;
   }
 
 
@@ -720,6 +731,16 @@ const phases = [
     color: #111b20;
 
     text-decoration: none;
+  }
+
+  .timeline-actions .phase-read-more {
+    padding: 11px 14px;
+    background: #172327;
+    color: #fffdf8;
+  }
+
+  .timeline-actions .phase-read-more:hover {
+    background: #9c4f37;
   }
 
 

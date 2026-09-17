@@ -1,0 +1,178 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+
+
+export function getStaticPaths() {
+const phases = [
+  {
+    id: 'naxalbari',
+    number: '01',
+    period: '1967',
+    title: 'Naxalbari',
+    dek: 'The uprising that supplied the movement with its name and enduring political symbol.',
+    overview: `In 1967, a confrontation over land and cultivation rights in the Naxalbari area of West Bengal's Darjeeling district developed into an armed peasant uprising. Revolutionary cadres working within the Communist Party of India (Marxist) supported militant land action and rejected the parliamentary course followed by the party leadership.`,
+    shift: `Naxalbari did not create a single continuous organisation, but it established a political reference point. The term “Naxalite” came to describe revolutionary communist groups that regarded armed agrarian struggle as the route to state power.`,
+    geography: `The initial episode was concentrated in northern West Bengal, especially the Naxalbari, Kharibari and Phansidewa areas. Its ideological influence, however, travelled rapidly to parts of Andhra Pradesh, Bihar, Kerala, Punjab, Uttar Pradesh and other regions.`,
+    legacy: `The uprising became the foundation myth of later Naxalite and Maoist formations. Subsequent organisations repeatedly returned to its themes of land, peasant mobilisation, class conflict and rejection of parliamentary politics.`,
+  },
+  {
+    id: 'cpi-ml',
+    number: '02',
+    period: '1969–72',
+    title: 'CPI(ML) and early fragmentation',
+    dek: 'A new revolutionary party sought rapid expansion but fractured under repression, leadership losses and internal disputes.',
+    overview: `The Communist Party of India (Marxist-Leninist) was formed in 1969 as revolutionary groups attempted to consolidate under a common organisation. Its leadership promoted armed struggle, boycott of elections and attacks directed at representatives of the existing rural order.`,
+    shift: `The phase transformed a local uprising into a national revolutionary project. At the same time, differences over tactics, mass organisation, leadership and the pace of armed action created serious internal divisions.`,
+    geography: `Activity appeared in West Bengal and in several dispersed regional centres, including parts of Andhra Pradesh, Bihar, Uttar Pradesh, Punjab and Kerala. These areas differed substantially in social conditions and organisational strength.`,
+    legacy: `By the early 1970s, state action, arrests, deaths of senior leaders and factional conflict had weakened the original organisation. Its collapse produced multiple successor groups rather than ending the wider movement.`,
+  },
+  {
+    id: 'pwg-mcc',
+    number: '03',
+    period: '1980s',
+    title: 'PWG and MCC consolidation',
+    dek: 'Two major organisations rebuilt durable regional bases and shifted the movement toward central and eastern India.',
+    overview: `The People's War Group emerged in Andhra Pradesh in 1980, while the Maoist Communist Centre developed separately from an earlier current rooted in Bihar. Both organisations sought longer-term cadre building, rural mobilisation and armed structures.`,
+    shift: `Compared with the rapid and fragmented mobilisation of the earlier period, these organisations placed greater emphasis on underground networks, territorial continuity, local organisations and sustained guerrilla activity.`,
+    geography: `PWG influence grew from Telangana and adjoining forest regions, while MCC consolidated in Bihar and later Jharkhand. Their expansion increasingly connected the movement with forested, mineral-rich and Adivasi-majority areas.`,
+    legacy: `PWG and MCC became the two principal streams that shaped the movement's later national structure. Their separate growth also created the organisational foundations for their eventual merger.`,
+  },
+  {
+    id: 'convergence',
+    number: '04',
+    period: '1990s–2004',
+    title: 'Expansion and convergence',
+    dek: 'Regional networks widened while major formations moved gradually toward organisational unification.',
+    overview: `During the 1990s and early 2000s, Maoist organisations expanded through adjoining districts in central and eastern India. Local fronts, armed squads and underground committees supported movement across state borders.`,
+    shift: `The movement increasingly operated through connected regional belts rather than isolated centres. Organisational negotiations, mergers among smaller formations and tactical coordination brought the principal groups closer together.`,
+    geography: `Important areas included parts of Andhra Pradesh, Bihar, Jharkhand, Chhattisgarh, Odisha, Maharashtra and West Bengal. Forest corridors and weak administrative reach facilitated inter-state movement.`,
+    legacy: `This period created the territorial and organisational conditions for the 2004 merger. It also established many of the zones that later became central to the conflict between CPI (Maoist) and the state.`,
+  },
+  {
+    id: 'cpi-maoist',
+    number: '05',
+    period: '2004–2010',
+    title: 'CPI (Maoist) and wider expansion',
+    dek: 'The merger of PWG and MCC created a unified party with a wider armed and territorial structure.',
+    overview: `In 2004, the People's War Group and the Maoist Communist Centre merged to form the Communist Party of India (Maoist). The merger brought major leadership, cadre and armed structures under a single organisation.`,
+    shift: `Unification improved coordination across regional commands and enabled the organisation to present a common political programme and military strategy. This phase also saw some of the conflict's most consequential attacks and counter-insurgency responses.`,
+    geography: `CPI (Maoist) operated across a broad belt extending through parts of central and eastern India, with particularly significant activity in Chhattisgarh, Jharkhand, Odisha, Bihar, Andhra Pradesh, Maharashtra and West Bengal.`,
+    legacy: `By the end of the decade, Left Wing Extremism was treated as a major internal-security challenge. The subsequent state response combined security operations with roads, communications, welfare delivery and deeper administrative access.`,
+  },
+  {
+    id: 'contraction',
+    number: '06',
+    period: '2011–Present',
+    title: 'Contraction and transformation',
+    dek: 'Leadership losses, surrenders, security pressure and administrative expansion reduced the movement’s operating space.',
+    overview: `From the early 2010s onward, CPI (Maoist) faced sustained pressure from security operations, arrests, encounters, surrenders and disruption of senior leadership networks. Its capacity became increasingly concentrated in a smaller number of forested areas.`,
+    shift: `The conflict moved from broad geographic expansion toward defence of remaining strongholds. Improved roads, telecommunications, security-force camps and state presence altered mobility, logistics and access to previously remote locations.`,
+    geography: `The movement retained its strongest presence in parts of the Bastar region and adjoining inter-state forest zones, while activity declined or fragmented across several former centres. Conditions continued to vary significantly by district.`,
+    legacy: `Contraction has not meant a complete end to violence or mobilisation. The present phase is defined by reduced geography, continuing local capability, leadership transition, rehabilitation and debate over governance, land, displacement and development.`,
+  },
+];
+
+
+  return phases.map((phase, index) => ({
+    params: { phase: phase.id },
+    props: {
+      phase,
+      previous: index > 0 ? phases[index - 1] : null,
+      next: index < phases.length - 1 ? phases[index + 1] : null,
+    },
+  }));
+}
+
+const { phase, previous, next } = Astro.props;
+const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '');
+const historyUrl = `${BASE}/background/history/`;
+---
+
+<BaseLayout
+  title={`${phase.title} — History of the Naxalite Movement`}
+  description={phase.dek}
+>
+  <Header />
+
+  <main class="phase-page">
+    <section class="phase-hero">
+      <div class="shell">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href={`${BASE}/background/`}>Background</a>
+          <span>·</span>
+          <a href={historyUrl}>History</a>
+          <span>·</span>
+          <span>{phase.period}</span>
+        </nav>
+
+        <div class="phase-hero-grid">
+          <div>
+            <span class="eyebrow">Phase {phase.number} · {phase.period}</span>
+            <h1>{phase.title}</h1>
+            <p>{phase.dek}</p>
+          </div>
+
+          <aside>
+            <span>Historical period</span>
+            <strong>{phase.period}</strong>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <article class="phase-record shell">
+      <section>
+        <span>01 / Overview</span>
+        <div><h2>What happened</h2><p>{phase.overview}</p></div>
+      </section>
+
+      <section>
+        <span>02 / Transition</span>
+        <div><h2>What changed</h2><p>{phase.shift}</p></div>
+      </section>
+
+      <section>
+        <span>03 / Geography</span>
+        <div><h2>Where it developed</h2><p>{phase.geography}</p></div>
+      </section>
+
+      <section>
+        <span>04 / Significance</span>
+        <div><h2>Why the phase matters</h2><p>{phase.legacy}</p></div>
+      </section>
+    </article>
+
+    <nav class="phase-pagination" aria-label="Historical phases">
+      <div class="shell phase-pagination-inner">
+        {previous ? (
+          <a href={`${historyUrl}${previous.id}/`}>
+            <small>Previous phase</small>
+            <strong>← {previous.title}</strong>
+          </a>
+        ) : <span></span>}
+
+        {next ? (
+          <a class="next" href={`${historyUrl}${next.id}/`}>
+            <small>Next phase</small>
+            <strong>{next.title} →</strong>
+          </a>
+        ) : (
+          <a class="next" href={historyUrl}>
+            <small>Return</small>
+            <strong>Full history →</strong>
+          </a>
+        )}
+      </div>
+    </nav>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .phase-page{background:#f3efe5;color:#111b20}.phase-hero{padding:48px 0 72px;border-bottom:1px solid #cec6b8}.breadcrumbs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:62px;font:700 11px/1.3 system-ui,sans-serif;color:#777168}.breadcrumbs a{color:inherit;text-decoration:none}.phase-hero-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(230px,.5fr);gap:80px;align-items:end}.eyebrow{font:800 10px/1.2 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.12em;color:#9c4f37}.phase-hero h1{max-width:850px;margin:12px 0 22px;font:700 clamp(54px,7vw,92px)/.94 Georgia,serif;letter-spacing:-.045em}.phase-hero p{max-width:730px;margin:0;font:400 20px/1.55 Georgia,serif;color:#615f59}.phase-hero aside{padding:24px;border-top:3px solid #9c4f37;background:#e8e1d5}.phase-hero aside span{display:block;margin-bottom:24px;font:800 9px/1 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.12em;color:#9c4f37}.phase-hero aside strong{font:700 30px/1 Georgia,serif}.phase-record{padding-top:30px;padding-bottom:80px}.phase-record section{display:grid;grid-template-columns:190px minmax(0,760px);gap:70px;padding:48px 0;border-bottom:1px solid #cec6b8}.phase-record section>span{font:800 9px/1.4 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.12em;color:#9c4f37}.phase-record h2{margin:0 0 18px;font:700 clamp(30px,4vw,45px)/1 Georgia,serif;letter-spacing:-.025em}.phase-record p{margin:0;font:400 18px/1.75 Georgia,serif;color:#575853}.phase-pagination{background:#172327;color:#fffdf8}.phase-pagination-inner{display:grid;grid-template-columns:1fr 1fr;gap:30px;padding-top:34px;padding-bottom:34px}.phase-pagination a{display:block;color:inherit;text-decoration:none}.phase-pagination .next{text-align:right}.phase-pagination small{display:block;margin-bottom:9px;font:800 9px/1 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.12em;color:#c99678}.phase-pagination strong{font:700 18px/1.25 Georgia,serif}
+  @media(max-width:800px){.phase-hero-grid{grid-template-columns:1fr;gap:35px}.phase-hero aside{max-width:430px}.phase-record section{grid-template-columns:1fr;gap:16px}}
+  @media(max-width:600px){.phase-hero{padding:34px 0 48px}.breadcrumbs{margin-bottom:40px}.phase-hero h1{font-size:49px}.phase-hero p{font-size:17px}.phase-record{padding-bottom:54px}.phase-record section{padding:36px 0}.phase-record p{font-size:16px}.phase-pagination-inner{grid-template-columns:1fr;gap:28px}.phase-pagination .next{text-align:left}}
+</style>

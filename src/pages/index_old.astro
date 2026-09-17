@@ -23,11 +23,6 @@ const articleUrl = (id: string) =>
 
 const pageUrl = (path: string) =>
   `${BASE}/${path.replace(/^\/+/, '')}`;
-
-const assetUrl = (path: string) =>
-  /^(https?:)?\/\//.test(path) || path.startsWith('data:')
-    ? path
-    : `${BASE}/${path.replace(/^\/+/, '')}`;
 ---
 
 <BaseLayout>
@@ -363,7 +358,7 @@ const assetUrl = (path: string) =>
                 <div class="article-feature-image">
 
                   <img
-                    src={assetUrl(featuredArticle.data.cover)}
+                    src={featuredArticle.data.cover}
                     alt={featuredArticle.data.title}
                   />
 
